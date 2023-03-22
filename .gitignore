@@ -270,3 +270,4 @@ paket-files/
 #Others
 .DS_Store
 .vscode/
+/Models/Emojis.cs

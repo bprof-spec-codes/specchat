@@ -1,20 +1,19 @@
 ﻿namespace specchat.Models
 {
-    public class Topic
+    public class Message
     {
         public Guid Id { get; }
         public string Content { get; set; }
         public DateTime Time { get; set; }
         public ApplicationUser User { get; set; }
-        public Topic MainThread { get; set; }
+        public Message MainThread { get; set; }
         public override string ToString()
         {
             return $"{User.UserName}: {Content} at {Time}";
         }
-        public Topic()
+        public Message()
         {
             Id = Guid.NewGuid();
         }
-
     }
 }
