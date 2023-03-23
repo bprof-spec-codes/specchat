@@ -1,11 +1,21 @@
-﻿namespace specchat.Models
+﻿using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
+
+namespace specchat.Models
 {
     public class Chat
     {
-        public Guid Id { get; set; }
+		[Key]
+		[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+		public Guid Id { get; set; }
         public string Name { get; set; }
-        public virtual ICollection<ApplicationUser> Users { get; set; }
-        public virtual ICollection<Message> Messages { get; set; }
+
+		[JsonIgnore]
+		public virtual ICollection<ApplicationUser> Users { get; set; }
+
+		[JsonIgnore]
+		public virtual ICollection<Message> Messages { get; set; }
         public override string ToString()
         {
             return $"{Id}: {Name}";
@@ -17,5 +27,11 @@
             Messages = new HashSet<Message>();
             Users = new HashSet<ApplicationUser>();
         }
-    }
+
+		public Chat(Guid id, string name)
+		{
+			Id = id;
+			Name = name;
+		}
+	}
 }
