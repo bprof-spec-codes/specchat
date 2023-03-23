@@ -7,7 +7,6 @@ namespace specchat.Models
     public class Message
     {
         [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public string Id { get; }
 
 		[Required]

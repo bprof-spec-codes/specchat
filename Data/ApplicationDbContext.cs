@@ -35,6 +35,18 @@ public class ApplicationDbContext : ApiAuthorizationDbContext<ApplicationUser>
 			LastName = "User"
 		};
 
+		builder.Entity<IdentityRole>().HasData(new IdentityRole()
+		{
+			Id = "1",
+			Name = "admin",
+		});
+
+		builder.Entity<IdentityUserRole<string>>().HasData(new IdentityUserRole<string>()
+		{
+			RoleId = "1",
+			UserId = kovi.Id
+		});
+
 		kovi.PasswordHash = ph.HashPassword(kovi, "password");
 		builder.Entity<ApplicationUser>().HasData(kovi);
 
