@@ -28,10 +28,10 @@ namespace specchat.Models
             Users = new HashSet<ApplicationUser>();
         }
 
-		public Chat(string id, string name)
+		public Chat(string name)
 		{
-			Id = id;
-			Name = name;
+			Id = Guid.NewGuid().ToString();
+            Name = name;
 		}
 	}
 }

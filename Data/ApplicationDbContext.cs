@@ -41,9 +41,9 @@ public class ApplicationDbContext : ApiAuthorizationDbContext<ApplicationUser>
 		
 		builder.Entity<Chat>().HasData(new Chat[]
 		{
-			new Chat(Guid.NewGuid() ,"Beszélgető"),
-			new Chat(Guid.NewGuid() ,"Kibeszélő"),
-			new Chat(Guid.NewGuid() ,"Játékok")
+			new Chat("Beszélgető"),
+			new Chat("Kibeszélő"),
+			new Chat("Játékok")
 		});
 		builder.Entity<Emoji>().HasData(new Emoji[]
 		{
@@ -54,7 +54,7 @@ public class ApplicationDbContext : ApiAuthorizationDbContext<ApplicationUser>
 		});
 		builder.Entity<Message>().HasData(new Message[]
 		{
-			new Message(Guid.NewGuid(), "Elso uzenet", DateTime.Now)
+			new Message("Elso uzenet", DateTime.Now)
 		});
 		base.OnModelCreating(builder);
 	}

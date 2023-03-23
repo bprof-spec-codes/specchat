@@ -26,9 +26,9 @@ namespace specchat.Models
             Id = Guid.NewGuid().ToString();
         }
 
-		public Message(string id, string content, DateTime time)
+		public Message(string content, DateTime time)
 		{
-			Id = id;
+            Id = Guid.NewGuid().ToString();
 			Content = content;
 			Time = time;
 		}
