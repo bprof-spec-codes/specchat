@@ -8,7 +8,7 @@ namespace specchat.Models
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public Guid Id { get; }
+        public string Id { get; }
 
 		[Required]
 		public string Content { get; set; }
@@ -16,17 +16,17 @@ namespace specchat.Models
 
 		[JsonIgnore]
 		public virtual ApplicationUser User { get; set; }
-        public Message MainThread { get; set; }
+        public Message? MainThread { get; set; }
         public override string ToString()
         {
             return $"{User.UserName}: {Content} at {Time}";
         }
         public Message()
         {
-            Id = Guid.NewGuid();
+            Id = Guid.NewGuid().ToString();
         }
 
-		public Message(Guid id, string content, DateTime time)
+		public Message(string id, string content, DateTime time)
 		{
 			Id = id;
 			Content = content;

@@ -8,7 +8,7 @@ namespace specchat.Models
     {
 		[Key]
 		[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-		public Guid Id { get; set; }
+		public string Id { get; set; }
         public string Name { get; set; }
 
 		[JsonIgnore]
@@ -23,12 +23,12 @@ namespace specchat.Models
 
         public Chat()
         {
-            Id = Guid.NewGuid();
+            Id = Guid.NewGuid().ToString();
             Messages = new HashSet<Message>();
             Users = new HashSet<ApplicationUser>();
         }
 
-		public Chat(Guid id, string name)
+		public Chat(string id, string name)
 		{
 			Id = id;
 			Name = name;
