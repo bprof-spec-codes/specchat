@@ -31,37 +31,44 @@ public class ApplicationDbContext : ApiAuthorizationDbContext<ApplicationUser>
 		builder.Entity<ChatUser>()
 			.HasOne(t => t.Chat)
 			.WithMany(t => t.ChatUsers)
-			.HasForeignKey(t => t.ChatId);
+			.HasForeignKey(t => t.ChatId)
+			.OnDelete(DeleteBehavior.NoAction);
 
 		builder.Entity<ChatUser>()
 			.HasOne(t => t.User)
 			.WithMany(t => t.ChatUsers)
-			.HasForeignKey(t => t.UserId);
+			.HasForeignKey(t => t.UserId)
+			.OnDelete(DeleteBehavior.NoAction);
 
         builder.Entity<Message>()
 			.HasOne(t => t.MainMessage)
 			.WithMany(t => t.SubMessage)
-			.HasForeignKey(t => t.MainMessageId);
+			.HasForeignKey(t => t.MainMessageId)
+			.OnDelete(DeleteBehavior.NoAction);
 
 		builder.Entity<Message>()
 			.HasOne(t => t.User)
 			.WithMany(t => t.Messages)
-			.HasForeignKey(t => t.UserId);
+			.HasForeignKey(t => t.UserId)
+			.OnDelete(DeleteBehavior.NoAction);
 
         builder.Entity<Message>()
             .HasOne(t => t.Chat)
             .WithMany(t => t.Messages)
-            .HasForeignKey(t => t.ChatId);
+            .HasForeignKey(t => t.ChatId)
+            .OnDelete(DeleteBehavior.NoAction);
 
 		builder.Entity<Emoji>()
 			.HasOne(t => t.User)
 			.WithMany(t => t.Emojis)
-			.HasForeignKey(t => t.UserId);
+			.HasForeignKey(t => t.UserId)
+			.OnDelete(DeleteBehavior.NoAction);
 
 		builder.Entity<Emoji>()
 			.HasOne(t => t.Message)
 			.WithMany(t => t.Emojis)
-			.HasForeignKey(t => t.MessageId);
+			.HasForeignKey(t => t.MessageId)
+			.OnDelete(DeleteBehavior.NoAction);
 
 
         PasswordHasher<ApplicationUser> ph = new PasswordHasher<ApplicationUser>();
