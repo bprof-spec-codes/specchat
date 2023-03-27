@@ -8,7 +8,7 @@ using specchat.Data;
 
 #nullable disable
 
-namespace specchat.Data.Migrations
+namespace specchat.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
     partial class ApplicationDbContextModelSnapshot : ModelSnapshot
@@ -193,7 +193,7 @@ namespace specchat.Data.Migrations
                         new
                         {
                             Id = "1",
-                            ConcurrencyStamp = "d92afe61-a611-4589-b228-9b386c15d9e8",
+                            ConcurrencyStamp = "c0ad9632-b5ce-4b5c-965f-0bf6b7abc317",
                             Name = "admin"
                         });
                 });
@@ -289,7 +289,7 @@ namespace specchat.Data.Migrations
                     b.HasData(
                         new
                         {
-                            UserId = "76fef108-3973-4129-a59d-e7d5ccca8c21",
+                            UserId = "73f9905e-4153-4c83-a991-e283dc41a8cd",
                             RoleId = "1"
                         });
                 });
@@ -390,18 +390,18 @@ namespace specchat.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "76fef108-3973-4129-a59d-e7d5ccca8c21",
+                            Id = "73f9905e-4153-4c83-a991-e283dc41a8cd",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "f80779a5-a7fe-4264-8201-838ab54b9c10",
+                            ConcurrencyStamp = "107bcd85-4fe5-4bc7-87c0-45315eb81fe9",
                             Email = "user@gmail.com",
                             EmailConfirmed = true,
                             FirstName = "Basic",
                             LastName = "User",
                             LockoutEnabled = false,
                             NormalizedUserName = "USER@GMAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEFxZshURv3ODyZH/pXNFiWx+fMOpn/91SxK6kDj5mYNrYssJ5bCvbCShkj+5XMT+FA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEEl5603pqxPoFWoZmqCb2CAHW8CRn4BN2LFGYgJjuBTPKiF+gB9DxzPUfvfqMVU22w==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "2b4ad86a-93ef-46b6-b3cd-93386f2e3b00",
+                            SecurityStamp = "c6d96048-3ff1-4086-898e-e06992d0112f",
                             TwoFactorEnabled = false,
                             UserName = "user@gmail.com"
                         });
@@ -423,12 +423,12 @@ namespace specchat.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "f059b035-e50e-4877-ba1e-e2e5ad8531fc",
+                            Id = "51d4e60b-b763-4f5a-9c0c-aa596c3ff64e",
                             Name = "Beszélgető"
                         },
                         new
                         {
-                            Id = "ab1f9f4d-187e-4f16-95ef-26c1d7317b3a",
+                            Id = "463417d2-df4f-4714-b896-195e7d8e8e7b",
                             Name = "Játékok"
                         });
                 });
@@ -506,11 +506,11 @@ namespace specchat.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "5e65c0a6-bee0-46a0-b0a3-d5d9c0b9e3db",
-                            ChatId = "f059b035-e50e-4877-ba1e-e2e5ad8531fc",
+                            Id = "e5a6a495-a3c6-4d3a-8451-6aff2f208804",
+                            ChatId = "51d4e60b-b763-4f5a-9c0c-aa596c3ff64e",
                             Content = "Elso uzenet",
-                            Time = new DateTime(2023, 3, 27, 19, 0, 56, 605, DateTimeKind.Local).AddTicks(8888),
-                            UserId = "76fef108-3973-4129-a59d-e7d5ccca8c21"
+                            Time = new DateTime(2023, 3, 27, 21, 18, 22, 236, DateTimeKind.Local).AddTicks(3747),
+                            UserId = "73f9905e-4153-4c83-a991-e283dc41a8cd"
                         });
                 });
 
@@ -570,13 +570,13 @@ namespace specchat.Data.Migrations
                     b.HasOne("specchat.Models.Chat", "Chat")
                         .WithMany("ChatUsers")
                         .HasForeignKey("ChatId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("specchat.Models.ApplicationUser", "User")
                         .WithMany("ChatUsers")
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("Chat");
@@ -589,13 +589,13 @@ namespace specchat.Data.Migrations
                     b.HasOne("specchat.Models.Message", "Message")
                         .WithMany("Emojis")
                         .HasForeignKey("MessageId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("specchat.Models.ApplicationUser", "User")
                         .WithMany("Emojis")
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("Message");
@@ -608,17 +608,18 @@ namespace specchat.Data.Migrations
                     b.HasOne("specchat.Models.Chat", "Chat")
                         .WithMany("Messages")
                         .HasForeignKey("ChatId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("specchat.Models.Message", "MainMessage")
                         .WithMany("SubMessage")
-                        .HasForeignKey("MainMessageId");
+                        .HasForeignKey("MainMessageId")
+                        .OnDelete(DeleteBehavior.NoAction);
 
                     b.HasOne("specchat.Models.ApplicationUser", "User")
                         .WithMany("Messages")
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("Chat");
