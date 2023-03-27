@@ -61,7 +61,7 @@ namespace specchat.Data
             }
             old.Name = chat.Name;
             old.Messages = chat.Messages;
-            old.Users = chat.Users;
+            old.ChatUsers = chat.ChatUsers;
             _context.SaveChanges();
         }
     }

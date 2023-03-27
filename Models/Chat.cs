@@ -8,29 +8,34 @@ namespace specchat.Models
     {
 		[Key]
 		public string Id { get; set; }
+
+        [Required]
         public string Name { get; set; }
 
 		[JsonIgnore]
-		public virtual ICollection<ApplicationUser> Users { get; set; }
+        [NotMapped]
+		public virtual ICollection<ChatUser> ChatUsers { get; set; }
 
 		[JsonIgnore]
+        [NotMapped]
 		public virtual ICollection<Message> Messages { get; set; }
-        public override string ToString()
-        {
-            return $"{Id}: {Name}";
-        }
 
         public Chat()
         {
             Id = Guid.NewGuid().ToString();
             Messages = new HashSet<Message>();
-            Users = new HashSet<ApplicationUser>();
+            ChatUsers = new HashSet<ChatUser>();
         }
 
-		public Chat(string name)
-		{
-			Id = Guid.NewGuid().ToString();
-            Name = name;
-		}
-	}
+		//public Chat(string name)
+		//{
+		//	Id = Guid.NewGuid().ToString();
+  //          Name = name;
+  //      }
+
+        public override string ToString()
+        {
+            return $"{Id}: {Name}";
+        }
+}
 }
