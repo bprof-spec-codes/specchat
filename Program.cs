@@ -9,11 +9,16 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+
+builder.Services.AddTransient<IMessageRepository, MessageRepository>();
+builder.Services.AddTransient<IChatRepository, ChatRepository>();
+
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
-    options.UseSqlite(connectionString));
+{
+    options.UseSqlServer(connectionString).UseLazyLoadingProxies();
+});
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
-builder.Services.AddSingleton<IMessageRepository, MessageRepository>();
-builder.Services.AddSingleton<IChatRepository, ChatRepository>();
+
 
 builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
     .AddEntityFrameworkStores<ApplicationDbContext>();
