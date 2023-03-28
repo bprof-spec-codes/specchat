@@ -1,6 +1,6 @@
 ﻿using specchat.Models;
 
-namespace specchat.Data.Repositories
+namespace specchat.Data.Repositories.Interfaces
 {
     public interface IMessageRepository
     {

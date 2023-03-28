@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using specchat.Data.Repositories.Interfaces;
 using specchat.Models;
 using System;
 

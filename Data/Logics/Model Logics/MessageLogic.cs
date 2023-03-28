@@ -1,11 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using specchat.Data.Logics.Logic_Interfaces;
-using specchat.Data.Repositories;
+using specchat.Data.Repositories.Interfaces;
 using specchat.Models;
 
 namespace specchat.Data.Logics.Model_Logics
 {
-	public class MessageLogic : IMessageLogic
+    public class MessageLogic : IMessageLogic
 	{
 		IMessageRepository rep;
 
