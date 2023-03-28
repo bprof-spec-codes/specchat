@@ -2,7 +2,7 @@
 using specchat.Models;
 using System;
 
-namespace specchat.Data
+namespace specchat.Data.Repositories
 {
     public class MessageRepository : IMessageRepository
     {

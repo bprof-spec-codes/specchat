@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI;
 using Microsoft.EntityFrameworkCore;
 using specchat.Data;
+using specchat.Data.Repositories;
 using specchat.Models;
 
 var builder = WebApplication.CreateBuilder(args);

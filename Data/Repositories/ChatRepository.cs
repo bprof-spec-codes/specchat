@@ -2,7 +2,7 @@
 using System;
 using System.Security.Cryptography;
 
-namespace specchat.Data
+namespace specchat.Data.Repositories
 {
     public class ChatRepository : IChatRepository
     {
