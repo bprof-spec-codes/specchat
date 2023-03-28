@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AutoMapper.Internal;
+using Microsoft.AspNetCore.Mvc;
 using specchat.Data.Repositories;
 using specchat.Models;
 
@@ -40,6 +41,14 @@ namespace specchat.Data.Logics.Model_Logics
 		public void UpdateChat([FromBody] Chat chat)
 		{
 			rep.Update(chat);
+		}
+		public IEnumerable<ApplicationUser> GetParticipants(string id)
+		{
+			return rep.Read(id).ChatUsers.Select(x => x.User);
+		}
+		public IEnumerable<Message> GetMessages(string id)
+		{
+			return rep.Read(id).Messages.Where(x => x.MainMessage == null);
 		}
 	}
 }
