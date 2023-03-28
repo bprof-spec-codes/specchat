@@ -15,26 +15,31 @@ namespace specchat.Data.Logics.Model_Logics
 
 		public void AddNewChat([FromBody] Chat chat)
 		{
-			throw new NotImplementedException();
+			rep.Create(chat);
 		}
 
 		public void DeleteChat(string id)
 		{
-			throw new NotImplementedException();
+			if (rep.Read(id) != null)
+			{
+				rep.Delete(id);
+			}
+			throw new Exception("This ID is not valid, or couldn't be found!");
 		}
 
 		public IEnumerable<Chat> GetAll()
 		{
-			throw new NotImplementedException();
+			return rep.Read();
 		}
 
 		public Chat GetById(string id)
 		{
-			throw new NotImplementedException();
+			return rep.Read(id);
 		}
 
 		public void UpdateChat([FromBody] Chat chat)
 		{
-			throw new NotImplementedException();
+			rep.Update(chat);
 		}
 	}
+}
