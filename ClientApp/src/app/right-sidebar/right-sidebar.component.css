@@ -1,0 +1,67 @@
+.thread-info {
+  line-height: 10px;
+  padding-left: 15px;
+}
+
+  .thread-info > h3,
+  .thread-info > p {
+    margin: 5px;
+    padding: 5px;
+  }
+
+.side-chat {
+  display: flex;
+  padding-bottom: .3em;
+}
+
+.img-container {
+  flex: 1 1 10%;
+  display: inline-block;
+  text-align: center;
+  padding-top: 1em;
+}
+
+.img-container-side {
+  display: flex;
+  align-items: center;
+}
+
+.side-text {
+  flex: 1 1 85%;
+  display: inline-block;
+  margin: 0;
+  align-content: center;
+  padding-right: 2em;
+}
+
+  .side-text h4 {
+    padding-top: .5em;
+    padding-bottom: .3em;
+    margin: 0;
+  }
+
+.text-form {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: .5em;
+  padding: 5px;
+  padding-right: 10px;
+  position: absolute;
+  bottom: 0;
+  width: -webkit-fill-available;
+}
+
+  .text-form > form {
+    display: flex;
+    align-items: center;
+    width: 100%;
+  }
+
+  .text-form input[type=text] {
+    border: none;
+    padding: 8px;
+    font-size: 17px;
+    float: right;
+    width: 100%;
+  }
