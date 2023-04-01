@@ -18,6 +18,10 @@ builder.Services.AddTransient<IChatRepository, ChatRepository>();
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
 {
     options.UseSqlServer(connectionString).UseLazyLoadingProxies();
+
+    //Mac tesztelés miatt kell Sqlite
+    //options.UseSqlite(connectionString);
+
 });
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
