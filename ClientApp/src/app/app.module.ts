@@ -6,6 +6,12 @@ import { RouterModule } from '@angular/router';
 
 import { AppComponent } from './app.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
+
+import { LeftSidebarComponent } from './left-sidebar/left-sidebar.component';
+import { RightSidebarComponent } from './right-sidebar/right-sidebar.component';
+import { ContentNavComponent } from './content-nav/content-nav.component';
+
+
 import { HomeComponent } from './home/home.component';
 import { CounterComponent } from './counter/counter.component';
 import { FetchDataComponent } from './fetch-data/fetch-data.component';
@@ -17,6 +23,11 @@ import { AuthorizeInterceptor } from 'src/api-authorization/authorize.intercepto
   declarations: [
     AppComponent,
     NavMenuComponent,
+
+    LeftSidebarComponent,
+    RightSidebarComponent,
+    ContentNavComponent,
+
     HomeComponent,
     CounterComponent,
     FetchDataComponent
