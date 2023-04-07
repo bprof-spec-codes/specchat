@@ -9,7 +9,11 @@ public class ApplicationUser : IdentityUser
 	public string FirstName { get; set; }
 	public string LastName { get; set; }
 
-	[JsonIgnore]
+    public string PictureContentType { get; set; }
+
+    public byte[] PictureData { get; set; }
+
+    [JsonIgnore]
 	[NotMapped]
 	public virtual ICollection<ChatUser> ChatUsers { get; set; }
 	
