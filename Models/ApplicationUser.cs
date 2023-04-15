@@ -9,9 +9,9 @@ public class ApplicationUser : IdentityUser
 	public string FirstName { get; set; }
 	public string LastName { get; set; }
 
-    public string PictureContentType { get; set; }
+    public string? PictureContentType { get; set; }
 
-    public byte[] PictureData { get; set; }
+    public byte[]? PictureData { get; set; }
 
     [JsonIgnore]
 	[NotMapped]
