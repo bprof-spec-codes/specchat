@@ -5,21 +5,7 @@
     <div class="threads">
         <h5>Channels</h5>
         <ul class="thread-list">
-            <li><p>thread1</p></li>
-            <li><p>thread2</p></li>
-            <li><p>thread3</p></li>
-            <li><p>thread4</p></li>
-            <li><p>thread5</p></li>
-            <li><p>thread6</p></li>
-            <li><p>thread7</p></li>
-            <li><p>thread8</p></li>
-            <li><p>thread9</p></li>
-            <li><p>thread10</p></li>
-            <li><p>thread11</p></li>
-            <li><p>thread12</p></li>
-            <li><p>thread13</p></li>
-            <li><p>thread14</p></li>
-            <li><p>thread15</p></li>
+            <li *ngFor="let chat of chats">{{ chat.Messages }}</li>
         </ul>
     </div>
     <div class="messages">
