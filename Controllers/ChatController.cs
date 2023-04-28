@@ -18,62 +18,62 @@ namespace specchat.Controllers
         }
 
         [HttpPost]
-        public IActionResult AddNewChat([FromBody] Chat chat)
+        public void AddNewChat([FromBody] Chat chat)
         {
             try
             {
                 _chatLogic.AddNewChat(chat);
-                return Ok();
             }
-            catch (Exception ex)
+            catch (Exception e)
             {
-                return BadRequest(ex.Message);
+                Console.WriteLine(DateTime.Now.ToShortTimeString() + "Error: " + e.Message);
             }
         }
 
         [HttpDelete("{id}")]
-        public IActionResult DeleteChat(string id)
+        public void DeleteChat(string id)
         {
             try
             {
                 _chatLogic.DeleteChat(id);
-                return Ok();
             }
-            catch (Exception ex)
+            catch (Exception e)
             {
-                return BadRequest(ex.Message);
+                Console.WriteLine(DateTime.Now.ToShortTimeString() + "Error: " + e.Message);
             }
         }
 
         [HttpGet]
-        public IActionResult GetAll()
+        public IEnumerable<Chat> GetAll()
         {
-            var chats = _chatLogic.GetAll();
-            return Ok(chats);
+            return _chatLogic.GetAll();
         }
 
         [HttpGet("{id}")]
-        public IActionResult GetById(string id)
+        public Chat GetById(string id)
         {
-            var chat = _chatLogic.GetById(id);
-            if (chat == null)
+            try
             {
-                return NotFound();
+                Chat chat = _chatLogic.GetById(id);
+                return chat;
             }
-            return Ok(chat);
+            catch (Exception e)
+            {
+                Console.WriteLine(DateTime.Now.ToShortTimeString() + "Error: " + e.Message);
+                throw;
+            }
         }
 
         [HttpPut]
-        public IActionResult UpdateChat([FromBody] Chat chat)
+        public void UpdateChat([FromBody] Chat chat)
         {
             try
             {
                 _chatLogic.UpdateChat(chat);
-                return Ok();
             }
-            catch (Exception ex)
+            catch (Exception e)
             {
-                return BadRequest(ex.Message);
+                Console.WriteLine(DateTime.Now.ToShortTimeString() + "Error: " + e.Message);
             }
         }
     }
