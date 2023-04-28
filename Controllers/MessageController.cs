@@ -18,62 +18,61 @@ namespace specchat.Controllers
         }
 
         [HttpPost]
-        public IActionResult AddNewMessage([FromBody] Message message)
+        public void AddNewMessage([FromBody] Message message)
         {
             try
             {
                 _messageLogic.AddNewMessage(message);
-                return Ok();
             }
-            catch (Exception ex)
+            catch (Exception e)
             {
-                return BadRequest(ex.Message);
+                Console.WriteLine(DateTime.Now.ToShortTimeString() + "Error: " + e.Message);
             }
         }
 
         [HttpDelete("{id}")]
-        public IActionResult DeleteMessage(string id)
+        public void DeleteMessage(string id)
         {
             try
             {
                 _messageLogic.DeleteMessage(id);
-                return Ok();
             }
-            catch (Exception ex)
+            catch (Exception e)
             {
-                return BadRequest(ex.Message);
+                Console.WriteLine(DateTime.Now.ToShortTimeString() + "Error: " + e.Message);
             }
         }
 
         [HttpGet]
-        public IActionResult GetAll()
+        public IEnumerable<Message> GetAll()
         {
-            var messages = _messageLogic.GetAll();
-            return Ok(messages);
+            return _messageLogic.GetAll();
         }
 
         [HttpGet("{id}")]
-        public IActionResult GetById(string id)
+        public Message GetById(string id)
         {
-            var message = _messageLogic.GetById(id);
-            if (message == null)
+            try
             {
-                return NotFound();
+                return _messageLogic.GetById(id);
             }
-            return Ok(message);
+            catch (Exception e)
+            {
+                Console.WriteLine(DateTime.Now.ToShortTimeString() + "Error: " + e.Message);
+                throw;
+            }
         }
 
         [HttpPut]
-        public IActionResult UpdateMessage([FromBody] Message message)
+        public void UpdateMessage([FromBody] Message message)
         {
             try
             {
                 _messageLogic.UpdateMessage(message);
-                return Ok();
             }
-            catch (Exception ex)
+            catch (Exception e)
             {
-                return BadRequest(ex.Message);
+                Console.WriteLine(DateTime.Now.ToShortTimeString() + "Error: " + e.Message);
             }
         }
     }

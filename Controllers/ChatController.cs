@@ -54,8 +54,7 @@ namespace specchat.Controllers
         {
             try
             {
-                Chat chat = _chatLogic.GetById(id);
-                return chat;
+                return _chatLogic.GetById(id);
             }
             catch (Exception e)
             {
