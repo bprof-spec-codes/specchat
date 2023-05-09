@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { MessageService } from '../services/message.service';
 import { Message } from '../models/message';
 import { Chat } from '../models/chat';
@@ -12,6 +12,8 @@ export class ThreadListComponent implements OnInit {
   msgs: Message[] = [];
   selectedChat!: Chat;
 
+  @Output() selectedMainMessage = new EventEmitter<Message>();
+  
   constructor(private messageService: MessageService) {}
 
   @Input() set selectedThread(chat: Chat) {
@@ -31,5 +33,9 @@ export class ThreadListComponent implements OnInit {
     return this.msgs.filter(
       (x) => x.chatId === this.selectedChat.id && x.MainMessageId == null
     );
+  }
+
+  onMainMessageClick(message: Message) {
+    this.selectedMainMessage.emit(message);
   }
 }

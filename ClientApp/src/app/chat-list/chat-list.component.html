@@ -1,7 +1,7 @@
-<div class="d-flex flex-column flex-shrink-0 p-3 h-100">
-    <h3> Chat List</h3>
-    <ul class="flex-1 mb-auto p-0 overflow-auto">
-      <li class="d-flex gap-2">
+<div class="d-flex flex-column flex-shrink-0 p-3 h-100 gap-2">
+    <ul class="flex-1 mt-auto overflow-auto">
+      <li *ngFor="let msg of showMsgs()">
+        <div class="d-flex gap-2">
           <img src="http://placehold.it/50/55C1E7/fff&text=U"
                 alt="User Avatar"
                 class="rounded float-start"
@@ -15,9 +15,19 @@
                   </small>
               </div>
               <p>
-                  message
+                  {{msg.content}}
               </p>
           </div>
+        </div>
+        <div class="message-actions hide-actions">
+          <div class="btn-group">
+            <button class="btn btn-dark" placement="bottom" ngbTooltip="Nice job!">😊</button>
+            <button class="btn btn-dark" placement="bottom" ngbTooltip="Completed">✅</button>
+            <button class="btn btn-dark" placement="bottom" ngbTooltip="I love it!">❤️</button>
+            <button class="btn btn-dark" placement="bottom" ngbTooltip="Pin message"><i class="bi bi-pin-angle"></i></button>
+            <button class="btn btn-dark"><i class="bi bi-three-dots-vertical"></i></button>
+          </div>
+        </div>
       </li>
     </ul>
     <div class="d-flex flex-row align-items-start">

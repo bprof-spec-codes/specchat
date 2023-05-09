@@ -33,4 +33,5 @@ export class SideMenuComponent implements OnInit {
   onThreadClick(chat: Chat) {
     this.selectedThreadId = chat.id;
     this.selectedThread.emit(chat);
-  }}
+  }
+}
