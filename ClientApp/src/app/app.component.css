@@ -22,4 +22,5 @@ app-thread-list {
 
 app-chat-list {
     flex: 1 1 40%;
+    border-left: 1px solid lightgrey;
 }

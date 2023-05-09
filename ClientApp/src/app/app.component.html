@@ -1,13 +1,12 @@
 <div class="wrapper">
-    <app-side-menu></app-side-menu>
-    <div class="page-wrapper">
-      <app-nav-menu></app-nav-menu>
-      <div class="d-flex content-wrapper">
-            <app-thread-list></app-thread-list>
-            <app-chat-list></app-chat-list>
-      </div>
+  <app-side-menu (selectedThread)="selectedChat = $event"></app-side-menu>
+  <div class="page-wrapper">
+    <app-nav-menu></app-nav-menu>
+    <div class="d-flex content-wrapper">
+      <app-thread-list [selectedThread]="selectedChat"></app-thread-list>
+      <app-chat-list></app-chat-list>
     </div>
+  </div>
 </div>
 
 <router-outlet></router-outlet>
-  
