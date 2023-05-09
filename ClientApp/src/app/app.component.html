@@ -3,8 +3,9 @@
   <div class="page-wrapper">
     <app-nav-menu></app-nav-menu>
     <div class="d-flex content-wrapper">
-      <app-thread-list [selectedThread]="selectedChat"></app-thread-list>
-      <app-chat-list></app-chat-list>
+      <app-thread-list [selectedThread]="selectedChat" (selectedMainMessage)="selectedMessage = $event"></app-thread-list>
+      <app-chat-list [selectedMainMessage]="selectedMessage" 
+      [style.display]="selectedMessage == null ? 'none' : 'block'"></app-chat-list>
     </div>
   </div>
 </div>
