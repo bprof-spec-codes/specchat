@@ -6,13 +6,10 @@ import { RouterModule } from '@angular/router';
 
 import { AppComponent } from './app.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
+import { SideMenuComponent } from './side-menu/side-menu.component';
+import { ThreadListComponent } from './thread-list/thread-list.component';
+import { ChatListComponent } from './chat-list/chat-list.component';
 
-import { LeftSidebarComponent } from './left-sidebar/left-sidebar.component';
-import { RightSidebarComponent } from './right-sidebar/right-sidebar.component';
-import { ContentNavComponent } from './content-nav/content-nav.component';
-
-
-import { HomeComponent } from './home/home.component';
 import { ApiAuthorizationModule } from 'src/api-authorization/api-authorization.module';
 import { AuthorizeGuard } from 'src/api-authorization/authorize.guard';
 import { AuthorizeInterceptor } from 'src/api-authorization/authorize.interceptor';
@@ -21,12 +18,9 @@ import { AuthorizeInterceptor } from 'src/api-authorization/authorize.intercepto
   declarations: [
     AppComponent,
     NavMenuComponent,
-
-    LeftSidebarComponent,
-    RightSidebarComponent,
-    ContentNavComponent,
-
-    HomeComponent
+    SideMenuComponent,
+    ThreadListComponent,
+    ChatListComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -34,7 +28,7 @@ import { AuthorizeInterceptor } from 'src/api-authorization/authorize.intercepto
     FormsModule,
     ApiAuthorizationModule,
     RouterModule.forRoot([
-      { path: '', component: HomeComponent, pathMatch: 'full' }
+      { path: '', component: AppComponent, pathMatch: 'full' }
     ])
   ],
   providers: [
