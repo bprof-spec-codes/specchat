@@ -1,7 +1,7 @@
 import { Chat } from "./chat";
 
 export class Message {
-    id?: number;
+    id = "";
     content = "";
     Time = "";
     IsPinned?: boolean;
