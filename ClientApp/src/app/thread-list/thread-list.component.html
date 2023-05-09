@@ -1,7 +1,11 @@
-<div class="d-flex flex-column flex-shrink-0 p-3 h-100 gap-2">
-    <h3>Thread Name</h3>
+<div class="d-flex flex-column flex-shrink-0 p-3 h-100 gap-2" *ngIf="selectedChat != null; else noElementsToDisplay">
+    <h3>{{selectedChat.name}}</h3>
     <ul class="flex-1 mb-auto p-0 overflow-auto">
-      <li class="d-flex gap-2" *ngFor="let msg of msgs">
+      <li class="d-flex gap-2" *ngFor="let msg of showMsgs()"
+      ngbPopover="Popover content"
+      popoverTitle="Popover title"
+      placement="top"
+      triggers="hover">
           <img src="http://placehold.it/50/55C1E7/fff&text=U"
                 alt="User Avatar"
                 class="rounded float-start"
@@ -29,3 +33,6 @@
       <button class="btn btn-primary btn-sm shadow-none" type="button"><i class="bi bi-arrow-right-square"></i></button>
     </div>
   </div>
+  <ng-template #noElementsToDisplay>
+    There is no thread selected
+  </ng-template>
