@@ -23,10 +23,10 @@ builder.Services.AddTransient<IMessageLogic, MessageLogic>();
 
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
 {
-    //options.UseSqlServer(connectionString).UseLazyLoadingProxies();
+    options.UseSqlServer(connectionString).UseLazyLoadingProxies();
 
     //Mac tesztelés miatt kell InMemoryDB
-    options.UseSqlServer(connectionString).UseLazyLoadingProxies();
+    //options.UseSqlServer(connectionString).UseLazyLoadingProxies();
 
 });
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();

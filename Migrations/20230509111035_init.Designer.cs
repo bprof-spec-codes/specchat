@@ -12,7 +12,7 @@ using specchat.Data;
 namespace specchat.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230327191822_init")]
+    [Migration("20230509111035_init")]
     partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -195,8 +195,20 @@ namespace specchat.Migrations
                         new
                         {
                             Id = "1",
-                            ConcurrencyStamp = "c0ad9632-b5ce-4b5c-965f-0bf6b7abc317",
+                            ConcurrencyStamp = "77086134-8ab7-4091-97a0-bedc0393ea8a",
                             Name = "admin"
+                        },
+                        new
+                        {
+                            Id = "2",
+                            ConcurrencyStamp = "93b73b98-0dce-4f98-9abe-ff3108f58c01",
+                            Name = "simple"
+                        },
+                        new
+                        {
+                            Id = "3",
+                            ConcurrencyStamp = "ccab7c9f-753e-4f1a-b77f-d818a59b127f",
+                            Name = "Teacher"
                         });
                 });
 
@@ -291,8 +303,18 @@ namespace specchat.Migrations
                     b.HasData(
                         new
                         {
-                            UserId = "73f9905e-4153-4c83-a991-e283dc41a8cd",
+                            UserId = "fc27a590-b551-4a5f-a0ba-d6b423ba8c82",
                             RoleId = "1"
+                        },
+                        new
+                        {
+                            UserId = "378e0445-5a0b-4dc2-a3ff-d34abc010560",
+                            RoleId = "2"
+                        },
+                        new
+                        {
+                            UserId = "e08c564a-9612-4b4b-bda4-f2d10a51efd0",
+                            RoleId = "3"
                         });
                 });
 
@@ -367,6 +389,12 @@ namespace specchat.Migrations
                     b.Property<bool>("PhoneNumberConfirmed")
                         .HasColumnType("bit");
 
+                    b.Property<string>("PictureContentType")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<byte[]>("PictureData")
+                        .HasColumnType("varbinary(max)");
+
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("nvarchar(max)");
 
@@ -392,20 +420,54 @@ namespace specchat.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "73f9905e-4153-4c83-a991-e283dc41a8cd",
+                            Id = "fc27a590-b551-4a5f-a0ba-d6b423ba8c82",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "107bcd85-4fe5-4bc7-87c0-45315eb81fe9",
+                            ConcurrencyStamp = "137423aa-f61b-4e4c-9bf4-40ec05690b59",
                             Email = "user@gmail.com",
                             EmailConfirmed = true,
                             FirstName = "Basic",
                             LastName = "User",
                             LockoutEnabled = false,
                             NormalizedUserName = "USER@GMAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEEl5603pqxPoFWoZmqCb2CAHW8CRn4BN2LFGYgJjuBTPKiF+gB9DxzPUfvfqMVU22w==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEFYZaabN26Zb5K+k67Cd9mXZKBku8q7ULunudWPAov7vsKxKt6AqPYpoM9+cE7jvYQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "c6d96048-3ff1-4086-898e-e06992d0112f",
+                            SecurityStamp = "8c2599c2-8ea0-4c12-8d95-680fd36e52c4",
                             TwoFactorEnabled = false,
                             UserName = "user@gmail.com"
+                        },
+                        new
+                        {
+                            Id = "378e0445-5a0b-4dc2-a3ff-d34abc010560",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "85bb82ee-a2be-4466-935e-8c8b577c90ca",
+                            Email = "simple@gmail.com",
+                            EmailConfirmed = true,
+                            FirstName = "Simple",
+                            LastName = "User",
+                            LockoutEnabled = false,
+                            NormalizedUserName = "SIMPLE@GMAIL.COM",
+                            PasswordHash = "AQAAAAEAACcQAAAAEJCfEiDRLr0laaCmAc5KDx2RQZ95nvTNTQhbLHZaUoYijPxNPL8MBjCv6+MwgLBkog==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "99661696-f83d-436e-ba73-ceb3090ced8f",
+                            TwoFactorEnabled = false,
+                            UserName = "simple@gmail.com"
+                        },
+                        new
+                        {
+                            Id = "e08c564a-9612-4b4b-bda4-f2d10a51efd0",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "0ace90ea-9199-459f-bd49-a934ff24be73",
+                            Email = "teacher@gmail.com",
+                            EmailConfirmed = true,
+                            FirstName = "Teacher",
+                            LastName = "Teacher_last",
+                            LockoutEnabled = false,
+                            NormalizedUserName = "TEACHER@GMAIL.COM",
+                            PasswordHash = "AQAAAAEAACcQAAAAEF7t2+cj1FcfxS+9rsRe5dKSsDYjdITgiPRhLZM++9FJofOcJkqn5aDlJI1zSV3cTQ==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "f584d589-c616-47b5-92fc-6d8de3e43bff",
+                            TwoFactorEnabled = false,
+                            UserName = "teacher@gmail.com"
                         });
                 });
 
@@ -425,13 +487,18 @@ namespace specchat.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "51d4e60b-b763-4f5a-9c0c-aa596c3ff64e",
+                            Id = "e4a93b77-7cb4-455f-b826-86bf3fbdf79e",
                             Name = "Beszélgető"
                         },
                         new
                         {
-                            Id = "463417d2-df4f-4714-b896-195e7d8e8e7b",
+                            Id = "06529009-e3f0-48a3-a57a-86b61b71cf9f",
                             Name = "Játékok"
+                        },
+                        new
+                        {
+                            Id = "1b60c271-fb5e-4f5e-bc81-e9a5b5f1ad78",
+                            Name = "Alamónium"
                         });
                 });
 
@@ -485,6 +552,9 @@ namespace specchat.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<bool>("IsPinned")
+                        .HasColumnType("bit");
+
                     b.Property<string>("MainMessageId")
                         .HasColumnType("nvarchar(450)");
 
@@ -508,11 +578,40 @@ namespace specchat.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "e5a6a495-a3c6-4d3a-8451-6aff2f208804",
-                            ChatId = "51d4e60b-b763-4f5a-9c0c-aa596c3ff64e",
+                            Id = "69c099c7-54b3-4d14-b04c-a8ac207959d7",
+                            ChatId = "e4a93b77-7cb4-455f-b826-86bf3fbdf79e",
                             Content = "Elso uzenet",
-                            Time = new DateTime(2023, 3, 27, 21, 18, 22, 236, DateTimeKind.Local).AddTicks(3747),
-                            UserId = "73f9905e-4153-4c83-a991-e283dc41a8cd"
+                            IsPinned = false,
+                            Time = new DateTime(2023, 5, 9, 13, 10, 35, 392, DateTimeKind.Local).AddTicks(4498),
+                            UserId = "fc27a590-b551-4a5f-a0ba-d6b423ba8c82"
+                        },
+                        new
+                        {
+                            Id = "d0312645-a3ea-4af8-9e8c-58294814e708",
+                            ChatId = "06529009-e3f0-48a3-a57a-86b61b71cf9f",
+                            Content = "Masodik Uzenet",
+                            IsPinned = false,
+                            Time = new DateTime(2023, 5, 9, 13, 10, 35, 392, DateTimeKind.Local).AddTicks(4565),
+                            UserId = "fc27a590-b551-4a5f-a0ba-d6b423ba8c82"
+                        },
+                        new
+                        {
+                            Id = "91899534-74ba-4ad3-b0b4-5b46504ad846",
+                            ChatId = "1b60c271-fb5e-4f5e-bc81-e9a5b5f1ad78",
+                            Content = "harmadik uzenet",
+                            IsPinned = false,
+                            Time = new DateTime(2023, 5, 9, 13, 10, 35, 392, DateTimeKind.Local).AddTicks(4574),
+                            UserId = "fc27a590-b551-4a5f-a0ba-d6b423ba8c82"
+                        },
+                        new
+                        {
+                            Id = "808bfed0-d047-4788-afa9-18d6db937b57",
+                            ChatId = "06529009-e3f0-48a3-a57a-86b61b71cf9f",
+                            Content = "negyedik uzenet",
+                            IsPinned = false,
+                            MainMessageId = "91899534-74ba-4ad3-b0b4-5b46504ad846",
+                            Time = new DateTime(2023, 5, 9, 13, 10, 35, 392, DateTimeKind.Local).AddTicks(4583),
+                            UserId = "fc27a590-b551-4a5f-a0ba-d6b423ba8c82"
                         });
                 });
 

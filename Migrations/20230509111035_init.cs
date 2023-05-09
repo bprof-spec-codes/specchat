@@ -30,6 +30,8 @@ namespace specchat.Migrations
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     FirstName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     LastName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    PictureContentType = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PictureData = table.Column<byte[]>(type: "varbinary(max)", nullable: true),
                     UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     Email = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
@@ -254,6 +256,7 @@ namespace specchat.Migrations
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     Content = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Time = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    IsPinned = table.Column<bool>(type: "bit", nullable: false),
                     UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     ChatId = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     MainMessageId = table.Column<string>(type: "nvarchar(450)", nullable: true)
@@ -304,31 +307,57 @@ namespace specchat.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { "1", "c0ad9632-b5ce-4b5c-965f-0bf6b7abc317", "admin", null });
+                values: new object[,]
+                {
+                    { "1", "77086134-8ab7-4091-97a0-bedc0393ea8a", "admin", null },
+                    { "2", "93b73b98-0dce-4f98-9abe-ff3108f58c01", "simple", null },
+                    { "3", "ccab7c9f-753e-4f1a-b77f-d818a59b127f", "Teacher", null }
+                });
 
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
-                columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "FirstName", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
-                values: new object[] { "73f9905e-4153-4c83-a991-e283dc41a8cd", 0, "107bcd85-4fe5-4bc7-87c0-45315eb81fe9", "user@gmail.com", true, "Basic", "User", false, null, null, "USER@GMAIL.COM", "AQAAAAEAACcQAAAAEEl5603pqxPoFWoZmqCb2CAHW8CRn4BN2LFGYgJjuBTPKiF+gB9DxzPUfvfqMVU22w==", null, false, "c6d96048-3ff1-4086-898e-e06992d0112f", false, "user@gmail.com" });
+                columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "FirstName", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "PictureContentType", "PictureData", "SecurityStamp", "TwoFactorEnabled", "UserName" },
+                values: new object[,]
+                {
+                    { "378e0445-5a0b-4dc2-a3ff-d34abc010560", 0, "85bb82ee-a2be-4466-935e-8c8b577c90ca", "simple@gmail.com", true, "Simple", "User", false, null, null, "SIMPLE@GMAIL.COM", "AQAAAAEAACcQAAAAEJCfEiDRLr0laaCmAc5KDx2RQZ95nvTNTQhbLHZaUoYijPxNPL8MBjCv6+MwgLBkog==", null, false, null, null, "99661696-f83d-436e-ba73-ceb3090ced8f", false, "simple@gmail.com" },
+                    { "e08c564a-9612-4b4b-bda4-f2d10a51efd0", 0, "0ace90ea-9199-459f-bd49-a934ff24be73", "teacher@gmail.com", true, "Teacher", "Teacher_last", false, null, null, "TEACHER@GMAIL.COM", "AQAAAAEAACcQAAAAEF7t2+cj1FcfxS+9rsRe5dKSsDYjdITgiPRhLZM++9FJofOcJkqn5aDlJI1zSV3cTQ==", null, false, null, null, "f584d589-c616-47b5-92fc-6d8de3e43bff", false, "teacher@gmail.com" },
+                    { "fc27a590-b551-4a5f-a0ba-d6b423ba8c82", 0, "137423aa-f61b-4e4c-9bf4-40ec05690b59", "user@gmail.com", true, "Basic", "User", false, null, null, "USER@GMAIL.COM", "AQAAAAEAACcQAAAAEFYZaabN26Zb5K+k67Cd9mXZKBku8q7ULunudWPAov7vsKxKt6AqPYpoM9+cE7jvYQ==", null, false, null, null, "8c2599c2-8ea0-4c12-8d95-680fd36e52c4", false, "user@gmail.com" }
+                });
 
             migrationBuilder.InsertData(
                 table: "Chats",
                 columns: new[] { "Id", "Name" },
                 values: new object[,]
                 {
-                    { "463417d2-df4f-4714-b896-195e7d8e8e7b", "Játékok" },
-                    { "51d4e60b-b763-4f5a-9c0c-aa596c3ff64e", "Beszélgető" }
+                    { "06529009-e3f0-48a3-a57a-86b61b71cf9f", "Játékok" },
+                    { "1b60c271-fb5e-4f5e-bc81-e9a5b5f1ad78", "Alamónium" },
+                    { "e4a93b77-7cb4-455f-b826-86bf3fbdf79e", "Beszélgető" }
                 });
 
             migrationBuilder.InsertData(
                 table: "AspNetUserRoles",
                 columns: new[] { "RoleId", "UserId" },
-                values: new object[] { "1", "73f9905e-4153-4c83-a991-e283dc41a8cd" });
+                values: new object[,]
+                {
+                    { "2", "378e0445-5a0b-4dc2-a3ff-d34abc010560" },
+                    { "3", "e08c564a-9612-4b4b-bda4-f2d10a51efd0" },
+                    { "1", "fc27a590-b551-4a5f-a0ba-d6b423ba8c82" }
+                });
 
             migrationBuilder.InsertData(
                 table: "Messages",
-                columns: new[] { "Id", "ChatId", "Content", "MainMessageId", "Time", "UserId" },
-                values: new object[] { "e5a6a495-a3c6-4d3a-8451-6aff2f208804", "51d4e60b-b763-4f5a-9c0c-aa596c3ff64e", "Elso uzenet", null, new DateTime(2023, 3, 27, 21, 18, 22, 236, DateTimeKind.Local).AddTicks(3747), "73f9905e-4153-4c83-a991-e283dc41a8cd" });
+                columns: new[] { "Id", "ChatId", "Content", "IsPinned", "MainMessageId", "Time", "UserId" },
+                values: new object[,]
+                {
+                    { "69c099c7-54b3-4d14-b04c-a8ac207959d7", "e4a93b77-7cb4-455f-b826-86bf3fbdf79e", "Elso uzenet", false, null, new DateTime(2023, 5, 9, 13, 10, 35, 392, DateTimeKind.Local).AddTicks(4498), "fc27a590-b551-4a5f-a0ba-d6b423ba8c82" },
+                    { "91899534-74ba-4ad3-b0b4-5b46504ad846", "1b60c271-fb5e-4f5e-bc81-e9a5b5f1ad78", "harmadik uzenet", false, null, new DateTime(2023, 5, 9, 13, 10, 35, 392, DateTimeKind.Local).AddTicks(4574), "fc27a590-b551-4a5f-a0ba-d6b423ba8c82" },
+                    { "d0312645-a3ea-4af8-9e8c-58294814e708", "06529009-e3f0-48a3-a57a-86b61b71cf9f", "Masodik Uzenet", false, null, new DateTime(2023, 5, 9, 13, 10, 35, 392, DateTimeKind.Local).AddTicks(4565), "fc27a590-b551-4a5f-a0ba-d6b423ba8c82" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Messages",
+                columns: new[] { "Id", "ChatId", "Content", "IsPinned", "MainMessageId", "Time", "UserId" },
+                values: new object[] { "808bfed0-d047-4788-afa9-18d6db937b57", "06529009-e3f0-48a3-a57a-86b61b71cf9f", "negyedik uzenet", false, "91899534-74ba-4ad3-b0b4-5b46504ad846", new DateTime(2023, 5, 9, 13, 10, 35, 392, DateTimeKind.Local).AddTicks(4583), "fc27a590-b551-4a5f-a0ba-d6b423ba8c82" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",

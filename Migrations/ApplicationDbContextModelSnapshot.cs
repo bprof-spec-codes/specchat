@@ -3,7 +3,6 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using specchat.Data;
 
@@ -12,10 +11,9 @@ using specchat.Data;
 namespace specchat.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230415205321_nullableProfilePic")]
-    partial class nullableProfilePic
+    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
     {
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -195,8 +193,20 @@ namespace specchat.Migrations
                         new
                         {
                             Id = "1",
-                            ConcurrencyStamp = "0f013ed5-7d82-4b0a-b409-ccaea75637e9",
+                            ConcurrencyStamp = "77086134-8ab7-4091-97a0-bedc0393ea8a",
                             Name = "admin"
+                        },
+                        new
+                        {
+                            Id = "2",
+                            ConcurrencyStamp = "93b73b98-0dce-4f98-9abe-ff3108f58c01",
+                            Name = "simple"
+                        },
+                        new
+                        {
+                            Id = "3",
+                            ConcurrencyStamp = "ccab7c9f-753e-4f1a-b77f-d818a59b127f",
+                            Name = "Teacher"
                         });
                 });
 
@@ -291,8 +301,18 @@ namespace specchat.Migrations
                     b.HasData(
                         new
                         {
-                            UserId = "14c6c689-094f-45fa-b820-e52db96ec883",
+                            UserId = "fc27a590-b551-4a5f-a0ba-d6b423ba8c82",
                             RoleId = "1"
+                        },
+                        new
+                        {
+                            UserId = "378e0445-5a0b-4dc2-a3ff-d34abc010560",
+                            RoleId = "2"
+                        },
+                        new
+                        {
+                            UserId = "e08c564a-9612-4b4b-bda4-f2d10a51efd0",
+                            RoleId = "3"
                         });
                 });
 
@@ -398,20 +418,54 @@ namespace specchat.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "14c6c689-094f-45fa-b820-e52db96ec883",
+                            Id = "fc27a590-b551-4a5f-a0ba-d6b423ba8c82",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "70585baa-ab86-477b-9041-f92d630839aa",
+                            ConcurrencyStamp = "137423aa-f61b-4e4c-9bf4-40ec05690b59",
                             Email = "user@gmail.com",
                             EmailConfirmed = true,
                             FirstName = "Basic",
                             LastName = "User",
                             LockoutEnabled = false,
                             NormalizedUserName = "USER@GMAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEF/C9oUqMoG/kcuNtFkvXPQXHsf/HmPzKHyIkSs3QM6WRgXciAQTTFMUeMe4UKzLmg==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEFYZaabN26Zb5K+k67Cd9mXZKBku8q7ULunudWPAov7vsKxKt6AqPYpoM9+cE7jvYQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "e68fef70-d9b7-4d0a-97cf-cbb07f94a723",
+                            SecurityStamp = "8c2599c2-8ea0-4c12-8d95-680fd36e52c4",
                             TwoFactorEnabled = false,
                             UserName = "user@gmail.com"
+                        },
+                        new
+                        {
+                            Id = "378e0445-5a0b-4dc2-a3ff-d34abc010560",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "85bb82ee-a2be-4466-935e-8c8b577c90ca",
+                            Email = "simple@gmail.com",
+                            EmailConfirmed = true,
+                            FirstName = "Simple",
+                            LastName = "User",
+                            LockoutEnabled = false,
+                            NormalizedUserName = "SIMPLE@GMAIL.COM",
+                            PasswordHash = "AQAAAAEAACcQAAAAEJCfEiDRLr0laaCmAc5KDx2RQZ95nvTNTQhbLHZaUoYijPxNPL8MBjCv6+MwgLBkog==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "99661696-f83d-436e-ba73-ceb3090ced8f",
+                            TwoFactorEnabled = false,
+                            UserName = "simple@gmail.com"
+                        },
+                        new
+                        {
+                            Id = "e08c564a-9612-4b4b-bda4-f2d10a51efd0",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "0ace90ea-9199-459f-bd49-a934ff24be73",
+                            Email = "teacher@gmail.com",
+                            EmailConfirmed = true,
+                            FirstName = "Teacher",
+                            LastName = "Teacher_last",
+                            LockoutEnabled = false,
+                            NormalizedUserName = "TEACHER@GMAIL.COM",
+                            PasswordHash = "AQAAAAEAACcQAAAAEF7t2+cj1FcfxS+9rsRe5dKSsDYjdITgiPRhLZM++9FJofOcJkqn5aDlJI1zSV3cTQ==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "f584d589-c616-47b5-92fc-6d8de3e43bff",
+                            TwoFactorEnabled = false,
+                            UserName = "teacher@gmail.com"
                         });
                 });
 
@@ -431,13 +485,18 @@ namespace specchat.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "03abea86-d22a-4fdd-a661-93fe44bed6c4",
+                            Id = "e4a93b77-7cb4-455f-b826-86bf3fbdf79e",
                             Name = "Beszélgető"
                         },
                         new
                         {
-                            Id = "0b75a61a-8f00-43b7-af82-4614071d7378",
+                            Id = "06529009-e3f0-48a3-a57a-86b61b71cf9f",
                             Name = "Játékok"
+                        },
+                        new
+                        {
+                            Id = "1b60c271-fb5e-4f5e-bc81-e9a5b5f1ad78",
+                            Name = "Alamónium"
                         });
                 });
 
@@ -517,12 +576,40 @@ namespace specchat.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "c382c4d8-9fde-429b-91d5-396cc3e85565",
-                            ChatId = "03abea86-d22a-4fdd-a661-93fe44bed6c4",
+                            Id = "69c099c7-54b3-4d14-b04c-a8ac207959d7",
+                            ChatId = "e4a93b77-7cb4-455f-b826-86bf3fbdf79e",
                             Content = "Elso uzenet",
                             IsPinned = false,
-                            Time = new DateTime(2023, 4, 15, 22, 53, 21, 154, DateTimeKind.Local).AddTicks(2332),
-                            UserId = "14c6c689-094f-45fa-b820-e52db96ec883"
+                            Time = new DateTime(2023, 5, 9, 13, 10, 35, 392, DateTimeKind.Local).AddTicks(4498),
+                            UserId = "fc27a590-b551-4a5f-a0ba-d6b423ba8c82"
+                        },
+                        new
+                        {
+                            Id = "d0312645-a3ea-4af8-9e8c-58294814e708",
+                            ChatId = "06529009-e3f0-48a3-a57a-86b61b71cf9f",
+                            Content = "Masodik Uzenet",
+                            IsPinned = false,
+                            Time = new DateTime(2023, 5, 9, 13, 10, 35, 392, DateTimeKind.Local).AddTicks(4565),
+                            UserId = "fc27a590-b551-4a5f-a0ba-d6b423ba8c82"
+                        },
+                        new
+                        {
+                            Id = "91899534-74ba-4ad3-b0b4-5b46504ad846",
+                            ChatId = "1b60c271-fb5e-4f5e-bc81-e9a5b5f1ad78",
+                            Content = "harmadik uzenet",
+                            IsPinned = false,
+                            Time = new DateTime(2023, 5, 9, 13, 10, 35, 392, DateTimeKind.Local).AddTicks(4574),
+                            UserId = "fc27a590-b551-4a5f-a0ba-d6b423ba8c82"
+                        },
+                        new
+                        {
+                            Id = "808bfed0-d047-4788-afa9-18d6db937b57",
+                            ChatId = "06529009-e3f0-48a3-a57a-86b61b71cf9f",
+                            Content = "negyedik uzenet",
+                            IsPinned = false,
+                            MainMessageId = "91899534-74ba-4ad3-b0b4-5b46504ad846",
+                            Time = new DateTime(2023, 5, 9, 13, 10, 35, 392, DateTimeKind.Local).AddTicks(4583),
+                            UserId = "fc27a590-b551-4a5f-a0ba-d6b423ba8c82"
                         });
                 });
 

@@ -6,6 +6,11 @@ namespace specchat.Models
 {
     public class Message
     {
+        public Message()
+        {
+            Id = Guid.NewGuid().ToString();
+            SubMessage = new HashSet<Message>();
+        }
         [Key]
         public string Id { get; set; }
 
@@ -51,10 +56,6 @@ namespace specchat.Models
             return $"{User.UserName}: {Content} at {Time}";
         }
 
-        public Message()
-        {
-            Id = Guid.NewGuid().ToString();
-        }
 
 		//public Message(string content, DateTime time)
 		//{
