@@ -1,14 +1,25 @@
-<div class="d-flex flex-column flex-shrink-0 p-3 h-100">
+<div class="d-flex flex-column flex-shrink-0 p-3 h-100 gap-2">
     <h3>Thread Name</h3>
-    <div class="list-group flex-1 mb-auto" *ngFor="let msg of msgs">
-      <a href="#" class="list-group-item list-group-item-action">
-        <div class="d-flex w-100 justify-content-start gap-3">
-          <img class="rounded-circle" src="https://i.imgur.com/RpzrMR2.jpg" width="30">
-          <h5>{{ msg.userId }}</h5>
-        </div>
-        <p class="mb-1 mt-1">{{msg.content}}</p>
-      </a>
-    </div>
+    <ul class="flex-1 mb-auto p-0 overflow-auto">
+      <li class="d-flex gap-2" *ngFor="let msg of msgs">
+          <img src="http://placehold.it/50/55C1E7/fff&text=U"
+                alt="User Avatar"
+                class="rounded float-start"
+                width="45"
+                height="45"/>
+          <div class="w-100">
+              <div class="d-flex justify-content-between">
+                  <strong class="primary-font">user name</strong>
+                  <small class="pull-right text-muted">
+                    <i class="bi bi-clock"></i>12 mins ago
+                  </small>
+              </div>
+              <p>
+                  {{msg.content}}
+              </p>
+          </div>
+      </li>
+    </ul>
     <div class="d-flex flex-row align-items-center gap-2">
       <img class="rounded-circle" src="https://i.imgur.com/RpzrMR2.jpg" width="30">
       <div class="form-floating flex-fill">

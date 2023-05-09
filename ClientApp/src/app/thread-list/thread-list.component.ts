@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { MessageService } from '../services/message.service';
 import { Message } from '../models/message';
 
@@ -9,7 +9,7 @@ import { Message } from '../models/message';
 })
 export class ThreadListComponent implements OnInit {
   msgs?: Message[];
-
+  
   constructor(private chatService: MessageService) {}
 
   ngOnInit(): void {
