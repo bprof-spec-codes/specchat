@@ -1,8 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using specchat.Data.Repositories.Interfaces;
 using specchat.Models;
 using System;
 
-namespace specchat.Data
+namespace specchat.Data.Repositories
 {
     public class MessageRepository : IMessageRepository
     {

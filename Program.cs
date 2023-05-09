@@ -3,6 +3,11 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI;
 using Microsoft.EntityFrameworkCore;
 using specchat.Data;
+using specchat.Data.Logics;
+using specchat.Data.Logics.Logic_Interfaces;
+using specchat.Data.Logics.Model_Logics;
+using specchat.Data.Repositories;
+using specchat.Data.Repositories.Interfaces;
 using specchat.Models;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -12,12 +17,25 @@ var connectionString = builder.Configuration.GetConnectionString("DefaultConnect
 
 builder.Services.AddTransient<IMessageRepository, MessageRepository>();
 builder.Services.AddTransient<IChatRepository, ChatRepository>();
+builder.Services.AddTransient<IChatLogic, ChatLogic>();
+builder.Services.AddTransient<IMessageLogic, MessageLogic>();
+
 
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
 {
+    //options.UseSqlServer(connectionString).UseLazyLoadingProxies();
+
+    //Mac tesztelés miatt kell InMemoryDB
     options.UseSqlServer(connectionString).UseLazyLoadingProxies();
+
 });
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
+
+builder.Services.AddCors(options => options.AddPolicy(name: "SpecChatOrigins",
+    policy =>
+    {
+        policy.WithOrigins("https://localhost:44488").AllowAnyMethod().AllowAnyHeader();
+    }));
 
 
 builder.Services.AddDefaultIdentity<ApplicationUser>(options =>
@@ -60,6 +78,7 @@ app.UseRouting();
 app.UseAuthentication();
 app.UseIdentityServer();
 app.UseAuthorization();
+app.UseCors("SpecChatOrigins");
 
 app.MapControllerRoute(
     name: "default",
@@ -69,4 +88,5 @@ app.MapRazorPages();
 app.MapFallbackToFile("index.html");;
 
 app.Run();
+
 

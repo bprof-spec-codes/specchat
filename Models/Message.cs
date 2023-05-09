@@ -14,6 +14,8 @@ namespace specchat.Models
 
         public DateTime Time { get; set; }
 
+        public bool IsPinned { get; set; }
+
         public string UserId { get; set; }
 
 		[JsonIgnore]
