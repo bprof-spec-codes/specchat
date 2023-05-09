@@ -1,13 +1,13 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ChatService } from '../services/chat.service';
 import { Chat } from '../models/chat';
 
 @Component({
-  selector: 'left-sidebar',
-  templateUrl: './left-sidebar.component.html',
-  styleUrls: ['./left-sidebar.component.css']
+  selector: 'app-side-menu',
+  templateUrl: './side-menu.component.html',
+  styleUrls: ['./side-menu.component.css']
 })
-export class LeftSidebarComponent {
+export class SideMenuComponent implements OnInit {
   chats?: Chat[] ;
   isExpanded = false;
 
@@ -27,4 +27,3 @@ export class LeftSidebarComponent {
     this.isExpanded = !this.isExpanded;
   }
 }
-
