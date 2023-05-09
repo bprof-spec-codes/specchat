@@ -1,3 +1,29 @@
+ul {
+    padding: 1.75rem 0 0 0;
+
+}
+
+ul:first-child {
+    margin-top: 2rem;
+}
+
 li {
     list-style: none;
+    position: relative;
 }
+
+.message-actions {
+    position: absolute;
+    right: 17px;
+    top: -16px;
+    z-index: 999;
+}
+
+.hide-actions {
+    display: none;
+  }
+  
+  li:hover .message-actions {
+    display: inline-flex;
+  }
+  
