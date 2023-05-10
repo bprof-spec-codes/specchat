@@ -1,6 +1,5 @@
 ul {
     padding: 1.75rem 0 0 0;
-
 }
 
 ul:first-child {
@@ -27,3 +26,6 @@ li {
     display: inline-flex;
   }
   
+.dropdown-menu {
+    padding: 5px 0 5px 0;
+}

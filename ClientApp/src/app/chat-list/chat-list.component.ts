@@ -1,7 +1,6 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { MessageService } from '../services/message.service';
 import { Message } from '../models/message';
-import { Chat } from '../models/chat';
 
 @Component({
   selector: 'app-chat-list',
@@ -10,13 +9,12 @@ import { Chat } from '../models/chat';
 })
 export class ChatListComponent implements OnInit {
   msgs: Message[] = [];
-  selectedMessage!: Message;
+  selectedMessage: Message | null = null;
 
   constructor(private messageService: MessageService) {}
 
-  @Input() set selectedMainMessage(message: Message) {
-    this.selectedMessage = message;
-  }
+  @Output() closeMainMessage = new EventEmitter<any>();
+  @Input() set selectedMainMessage(message: any) { this.selectedMessage = message; }
 
   ngOnInit(): void {
     this.messageService.getChat().subscribe((result: Message[]) => {
@@ -29,7 +27,12 @@ export class ChatListComponent implements OnInit {
       return [];
     }
     return this.msgs.filter(
-      (x) => x.chatId != this.selectedMessage.id && x.MainMessageId == x.chatId
+      (x) => x.chatId != this.selectedMessage?.id && x.MainMessageId == x.chatId
     );
+  }
+
+  closeThread() {
+    this.selectedMessage = null;
+    this.closeMainMessage.emit(this.selectedMessage);
   }
 }
