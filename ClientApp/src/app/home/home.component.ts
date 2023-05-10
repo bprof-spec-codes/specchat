@@ -1,15 +1,11 @@
 import { Component } from '@angular/core';
-import { Chat } from './models/chat';
-import { Message } from './models/message';
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  selector: 'app-home',
+  templateUrl: './home.component.html',
+  styleUrls: ['./home.component.css']
 })
-export class AppComponent {
-  title = 'app';
-
+export class HomeComponent {
   selectedChat?: any;
   selectedMessage?: any;
 
@@ -23,4 +19,3 @@ export class AppComponent {
     console.log(`Selected thread ID: ${threadId}`);
   }
 }
-

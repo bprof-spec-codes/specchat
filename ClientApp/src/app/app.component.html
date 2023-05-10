@@ -1,13 +1,2 @@
-<div class="wrapper">
-  <app-side-menu (selectedThread)="selectedChat = $event"></app-side-menu>
-  <div class="page-wrapper">
-    <app-nav-menu></app-nav-menu>
-    <div class="d-flex content-wrapper">
-      <app-thread-list [selectedThread]="selectedChat" (selectedMainMessage)="selectedMessage = $event"></app-thread-list>
-      <app-chat-list [selectedMainMessage]="selectedMessage" 
-      [style.display]="selectedMessage == null ? 'none' : 'block'"></app-chat-list>
-    </div>
-  </div>
-</div>
-
-<router-outlet></router-outlet>
+<router-outlet>
+</router-outlet>
