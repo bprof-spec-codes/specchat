@@ -10,6 +10,7 @@ namespace specchat.Models
         {
             Id = Guid.NewGuid().ToString();
             SubMessage = new HashSet<Message>();
+            Emojis = new HashSet<Emoji>();
         }
         [Key]
         public string Id { get; set; }

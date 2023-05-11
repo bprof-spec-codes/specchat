@@ -6,6 +6,11 @@ namespace specchat.Models
 {
     public class Emoji
     {
+        public Emoji()
+        {
+            Id = Guid.NewGuid().ToString();
+        }
+
 		[Key]
 		public string Id { get; set; }
 
@@ -24,15 +29,5 @@ namespace specchat.Models
 		[NotMapped]
 		public virtual Message Message { get; set; }
 
-
-        public Emoji()
-        {
-            Id = Guid.NewGuid().ToString();
-        }
-   //     public Emoji(string code)
-   //     {
-			//Id = Guid.NewGuid().ToString();
-   //         Code = code;
-   //     }
     }
 }
