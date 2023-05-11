@@ -5,6 +5,7 @@ using Duende.IdentityServer.EntityFramework.Options;
 using specchat.Models;
 using System.IO;
 using Microsoft.AspNetCore.Identity;
+using Newtonsoft.Json;
 
 namespace specchat.Data;
 
@@ -72,6 +73,26 @@ public class ApplicationDbContext : ApiAuthorizationDbContext<ApplicationUser>
 
 
         PasswordHasher<ApplicationUser> ph = new PasswordHasher<ApplicationUser>();
+		var users = JsonConvert.DeserializeObject<List<ApplicationUser>>(File.ReadAllText("Data/SeedData/gusers.json"));
+		users.ForEach(u => u.PasswordHash = ph.HashPassword(u, u.PasswordHash));
+		var chatUsers = JsonConvert.DeserializeObject<List<ChatUser>>(File.ReadAllText("Data/SeedData/gchatuser.json"));
+		chatUsers = chatUsers.Distinct().ToList();
+
+        builder.Entity<ApplicationUser>()
+			.HasData(users);
+        builder.Entity<Chat>()
+            .HasData(JsonConvert.DeserializeObject<List<Chat>>(File.ReadAllText("Data/SeedData/gchats.json")));
+        builder.Entity<ChatUser>()
+            .HasData(chatUsers);
+        builder.Entity<Message>()
+            .HasData(JsonConvert.DeserializeObject<List<Message>>(File.ReadAllText("Data/SeedData/gmessages.json")));
+        builder.Entity<Emoji>()
+            .HasData(JsonConvert.DeserializeObject<List<Emoji>>(File.ReadAllText("Data/SeedData/gemojis.json")));
+        builder.Entity<IdentityRole>()
+            .HasData(JsonConvert.DeserializeObject<List<IdentityRole>>(File.ReadAllText("Data/SeedData/groles.json")));
+        builder.Entity<IdentityUserRole<string>>()
+            .HasData(JsonConvert.DeserializeObject<List<IdentityUserRole<string>>>(File.ReadAllText("Data/SeedData/guserroles.json")));
+        /*
 		List<ApplicationUser> users = new List<ApplicationUser>();
 
 		ApplicationUser kovi = new ApplicationUser
@@ -228,7 +249,8 @@ public class ApplicationDbContext : ApiAuthorizationDbContext<ApplicationUser>
 		messages.Add(msg4);
 
 		builder.Entity<Message>().HasData(messages);
-		base.OnModelCreating(builder);
+		*/
+        base.OnModelCreating(builder);
 	}
 }
 
