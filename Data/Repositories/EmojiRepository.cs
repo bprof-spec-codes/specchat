@@ -1,4 +1,5 @@
-﻿using specchat.Models;
+﻿using specchat.Data.Repositories.Interfaces;
+using specchat.Models;
 
 namespace specchat.Data.Repositories
 {

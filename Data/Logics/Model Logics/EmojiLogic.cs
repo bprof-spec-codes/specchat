@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using specchat.Data.Repositories;
+using specchat.Data.Logics.Logic_Interfaces;
 using specchat.Data.Repositories.Interfaces;
 using specchat.Models;
 

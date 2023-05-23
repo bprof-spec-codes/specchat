@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using specchat.Models;
 
-namespace specchat.Data.Logics.Model_Logics
+namespace specchat.Data.Logics.Logic_Interfaces
 {
     public interface IEmojiLogic
     {
