@@ -11,6 +11,7 @@ import { Chat } from '../models/chat';
 export class ThreadListComponent implements OnInit {
   msgs: Message[] = [];
   selectedChat!: Chat;
+  msg: Message = new Message;
 
   @Output() selectedMainMessage = new EventEmitter<Message>();
   
@@ -21,7 +22,7 @@ export class ThreadListComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.messageService.getChat().subscribe((result: Message[]) => {
+    this.messageService.getAll().subscribe((result: Message[]) => {
       this.msgs = result;
     });
   }
@@ -31,11 +32,28 @@ export class ThreadListComponent implements OnInit {
       return [];
     }
     return this.msgs.filter(
-      (x) => x.chatId === this.selectedChat.id && x.MainMessageId == null
+      (x) =>  !x.MainMessageId && x.chatId == this.selectedChat.id
     );
   }
 
   onMainMessageClick(message: Message) {
     this.selectedMainMessage.emit(message);
+  }
+
+  sendMessage(content: string): void {
+    
+    console.log(content);
+    this.msg.MainMessageId = "";
+    this.msg.chatId = this.selectedChat.id;
+    this.msg.content = content
+
+    this.messageService.addNewMessage(this.msg)
+      .subscribe((result) => {
+      console.log(result);
+    });
+
+    // Clear the textarea after sending the message
+    this.msg.content = '';
+    this.msg.chatId = "";
   }
 }

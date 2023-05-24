@@ -15,4 +15,24 @@ export class ChatService {
   public getChat() : Observable<Chat[]> {
     return this.http.get<Chat[]>(`${environment.baseApiUrl}/${this.url}`);
   }
+
+  addNewChat(chat: Chat): Observable<void> {
+    return this.http.post<void>(`${environment.baseApiUrl}/${this.url}/addNewChat`, chat);
+  }
+
+  deleteChat(id: string): Observable<void> {
+    return this.http.delete<void>(`${environment.baseApiUrl}/${this.url}/deleteChat/${id}`);
+  }
+
+  getAllChats(): Observable<Chat[]> {
+    return this.http.get<Chat[]>(`${environment.baseApiUrl}/${this.url}/getAll`);
+  }
+
+  getChatById(id: string): Observable<Chat> {
+    return this.http.get<Chat>(`${environment.baseApiUrl}/${this.url}/getById/${id}`);
+  }
+
+  updateChat(chat: Chat): Observable<void> {
+    return this.http.put<void>(`${environment.baseApiUrl}/${this.url}/updateChat`, chat);
+  }
 }
