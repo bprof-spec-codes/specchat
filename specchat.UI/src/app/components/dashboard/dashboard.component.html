@@ -1,0 +1,69 @@
+<div class="container">
+  <div class="row mb-3">
+    <div class="col-12">
+      <button class="btn btn-primary" (click)="goToHome()">Back</button>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12">
+      <h3>Add User to Chat</h3>
+      <div class="row">
+        <div class="col-4">
+          <label for="chatSelect">Select Chat:</label>
+          <select id="chatSelect" class="form-select" [(ngModel)]="selectedChatId">
+            <option *ngFor="let chat of chats" [value]="chat.id">{{ chat.name }}</option>
+          </select>
+        </div>
+        <div class="col-4">
+          <label for="userSelect">Select User:</label>
+          <select id="userSelect" class="form-select" [(ngModel)]="selectedUserId">
+            <option *ngFor="let user of users" [value]="user.id">{{ user.firstName }} {{ user.lastName }}</option>
+          </select>
+        </div>
+      </div>
+      <div class="row">
+        <p *ngIf="errormessage != ''" class="text-danger">User already in chat</p>
+      </div>
+      <div class="row pt-3">
+        <div class="col-3">
+          <button class="btn btn-primary w-100" (click)="addUserToChat()">Add</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="row mt-4">
+    <div class="col-12">
+      <h4>Add New Chat</h4>
+      <div class="input-group mb-3">
+        <input type="text" class="form-control" [(ngModel)]="newChatName" placeholder="Enter chat name">
+        <button class="btn btn-success" (click)="addNewChat()">Add Chat</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="row mt-4">
+    <div class="col-12">
+      <h2>Chats</h2>
+      <div class="table-responsive">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let chat of chats">
+              <td>{{ chat.name }}</td>
+              <td class="d-flex flex-row gap-3">
+                <button class="btn btn-danger" (click)="deleteChat(chat.id)">Delete</button>
+                <button class="btn btn-secondary" (click)="exportChat(chat.id)">Export</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,12 @@
+<header>
+    <nav
+      class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow">
+      <button class="btn" (click)="toggleSidenav.emit()"><i class="bi bi-list"></i></button>
+      <div class="container">
+        <h4 *ngIf="selectedChat">{{selectedChat.name}}</h4>
+        <h4 *ngIf="!selectedChat">Specchat threads</h4>
+      </div>
+    </nav>
+  </header>
+  
+  

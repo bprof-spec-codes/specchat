@@ -1,0 +1,20 @@
+<div class="wrapper">
+    <app-side-menu (selectedThread)="selectedChat = $event" [thisUser]="user"
+    [style.display]="isOpen ? 'block' : 'none'"></app-side-menu>
+    <div class="page-wrapper">
+      <app-nav-menu [selectedChatI]="selectedChat" (toggleSidenav)="isOpen = !isOpen"></app-nav-menu>
+      <div class="d-flex content-wrapper">
+        <app-thread-list 
+            [selectedThread]="selectedChat"
+            (selectedMainMessage)="selectedMessage = $event"
+            [thisUser]="user">
+        </app-thread-list>
+        <app-chat-list 
+            [selectedMainMessage]="selectedMessage"
+            (closeMainMessage)="selectedMessage = $event"
+            [style.display]="selectedMessage == null ? 'none' : 'block'"
+            [thisUser]="user">
+        </app-chat-list>
+      </div>
+    </div>
+  </div>
