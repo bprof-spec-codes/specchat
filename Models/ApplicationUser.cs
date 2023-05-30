@@ -6,7 +6,15 @@ namespace specchat.Models;
 
 public class ApplicationUser : IdentityUser
 {
-	public string FirstName { get; set; }
+    public ApplicationUser()
+    {
+        Id = Guid.NewGuid().ToString();
+        ChatUsers = new HashSet<ChatUser>();
+        Messages = new HashSet<Message>();
+        Emojis = new HashSet<Emoji>();
+    }
+
+    public string FirstName { get; set; }
 	public string LastName { get; set; }
 
     public string? PictureContentType { get; set; }

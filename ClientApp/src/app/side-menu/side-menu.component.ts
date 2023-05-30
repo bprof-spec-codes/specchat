@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { ChatService } from '../services/chat.service';
 import { Chat } from '../models/chat';
 
@@ -8,10 +8,13 @@ import { Chat } from '../models/chat';
   styleUrls: ['./side-menu.component.css']
 })
 export class SideMenuComponent implements OnInit {
-  chats?: Chat[] ;
+  chats?: Chat[];
   isExpanded = false;
 
   constructor(private chatService: ChatService) {}
+
+  selectedThreadId = "";
+  @Output() selectedThread = new EventEmitter<Chat>();
 
   ngOnInit(): void {
     this.chatService.getChat().subscribe((result: Chat[]) => {
@@ -25,5 +28,10 @@ export class SideMenuComponent implements OnInit {
 
   toggle() {
     this.isExpanded = !this.isExpanded;
+  }
+
+  onThreadClick(chat: Chat) {
+    this.selectedThreadId = chat.id;
+    this.selectedThread.emit(chat);
   }
 }

@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace specchat.Migrations
+namespace specchat.API.Migrations
 {
     public partial class init : Migration
     {
@@ -28,8 +28,10 @@ namespace specchat.Migrations
                 columns: table => new
                 {
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    FirstName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    LastName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    FirstName = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
+                    LastName = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
+                    PictureContentType = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PictureData = table.Column<byte[]>(type: "varbinary(max)", nullable: true),
                     UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     Email = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
@@ -60,63 +62,6 @@ namespace specchat.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Chats", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "DeviceCodes",
-                columns: table => new
-                {
-                    UserCode = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
-                    DeviceCode = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
-                    SubjectId = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: true),
-                    SessionId = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
-                    ClientId = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: true),
-                    CreationTime = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Expiration = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Data = table.Column<string>(type: "nvarchar(max)", maxLength: 50000, nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_DeviceCodes", x => x.UserCode);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Keys",
-                columns: table => new
-                {
-                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    Version = table.Column<int>(type: "int", nullable: false),
-                    Created = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Use = table.Column<string>(type: "nvarchar(450)", nullable: true),
-                    Algorithm = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
-                    IsX509Certificate = table.Column<bool>(type: "bit", nullable: false),
-                    DataProtected = table.Column<bool>(type: "bit", nullable: false),
-                    Data = table.Column<string>(type: "nvarchar(max)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Keys", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "PersistedGrants",
-                columns: table => new
-                {
-                    Key = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
-                    Type = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    SubjectId = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: true),
-                    SessionId = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
-                    ClientId = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: true),
-                    CreationTime = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Expiration = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    ConsumedTime = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    Data = table.Column<string>(type: "nvarchar(max)", maxLength: 50000, nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_PersistedGrants", x => x.Key);
                 });
 
             migrationBuilder.CreateTable(
@@ -165,8 +110,8 @@ namespace specchat.Migrations
                 name: "AspNetUserLogins",
                 columns: table => new
                 {
-                    LoginProvider = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: false),
-                    ProviderKey = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: false),
+                    LoginProvider = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    ProviderKey = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     ProviderDisplayName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     UserId = table.Column<string>(type: "nvarchar(450)", nullable: false)
                 },
@@ -210,8 +155,8 @@ namespace specchat.Migrations
                 columns: table => new
                 {
                     UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    LoginProvider = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: false),
+                    LoginProvider = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     Value = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
@@ -254,6 +199,7 @@ namespace specchat.Migrations
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     Content = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Time = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    IsPinned = table.Column<bool>(type: "bit", nullable: false),
                     UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     ChatId = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     MainMessageId = table.Column<string>(type: "nvarchar(450)", nullable: true)
@@ -304,31 +250,57 @@ namespace specchat.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { "1", "c0ad9632-b5ce-4b5c-965f-0bf6b7abc317", "admin", null });
+                values: new object[,]
+                {
+                    { "57904da3-ce6b-4e24-8af5-e0119baf42da", null, "User", "USER" },
+                    { "7a124792-7f2a-4b2f-a5f3-222a4e1a5da0", null, "Teacher", "TEACHER" },
+                    { "8fa25c3e-7ea0-4990-bf7d-bf9afba90b6a", null, "Admin", "ADMIN" }
+                });
 
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
-                columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "FirstName", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
-                values: new object[] { "73f9905e-4153-4c83-a991-e283dc41a8cd", 0, "107bcd85-4fe5-4bc7-87c0-45315eb81fe9", "user@gmail.com", true, "Basic", "User", false, null, null, "USER@GMAIL.COM", "AQAAAAEAACcQAAAAEEl5603pqxPoFWoZmqCb2CAHW8CRn4BN2LFGYgJjuBTPKiF+gB9DxzPUfvfqMVU22w==", null, false, "c6d96048-3ff1-4086-898e-e06992d0112f", false, "user@gmail.com" });
+                columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "FirstName", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "PictureContentType", "PictureData", "SecurityStamp", "TwoFactorEnabled", "UserName" },
+                values: new object[,]
+                {
+                    { "434ae560-46c7-407b-bc42-c366e7ca6f30", 0, "33e3955b-c691-4d96-8375-4e9336da199c", "admin@admin.adm", true, "Super", "User", false, null, null, "ADMINUSER", "AQAAAAEAACcQAAAAEF+oqEtp/WLNlMpuzK0JXzQZA8Y7MRrQqwOsxxanqOmAyLspPZU4/w5Jeji5f90Gjw==", null, false, null, null, "22043bca-369f-4ad7-977e-bd89ddf15139", false, "adminuser" },
+                    { "e368860c-9be4-402a-8d5f-cef41b26d9b5", 0, "52c0f802-ea17-48ad-bf26-998a88d2fb21", "teacher@teach.er", true, "Teacher", "User", false, null, null, "TEACHEREX", "AQAAAAEAACcQAAAAEErh0ORgc5vlcigQMoy5zKD+adUSguL5649WhdLIvfUZUQlBUhkAOL3SyIl8NOmkdA==", null, false, null, null, "cb92e802-612e-44fb-b552-d82292c34f01", false, "teacherex" },
+                    { "f0151a2e-cad2-4b84-b900-232f2cc6c714", 0, "6a37e2ab-85bb-4a86-8cce-d794c575f553", "basic@us.er", true, "Basic", "User", false, null, null, "BASICUSER", "AQAAAAEAACcQAAAAEC3JYzoLzND4wulczIpLlO63VM1GiWCR4AhDi6SCtCLnREdWQYkjHRouOu1PIEyllQ==", null, false, null, null, "ae4ff8c9-e67d-4548-a7c6-b6d5fea3f80e", false, "basicuser" }
+                });
 
             migrationBuilder.InsertData(
                 table: "Chats",
                 columns: new[] { "Id", "Name" },
                 values: new object[,]
                 {
-                    { "463417d2-df4f-4714-b896-195e7d8e8e7b", "Játékok" },
-                    { "51d4e60b-b763-4f5a-9c0c-aa596c3ff64e", "Beszélgető" }
+                    { "06529009-e3f0-48a3-a57a-86b61b71cf9f", "Játékok" },
+                    { "1b60c271-fb5e-4f5e-bc81-e9a5b5f1ad78", "Alamónium" },
+                    { "28c07e65-9fb0-4900-9cd9-faa3f97704d9", "Support" },
+                    { "70f0f02d-83de-490b-b42d-e37fff244f77", "Engineering" },
+                    { "76d422c9-6d26-42a4-a24b-aae84b4ad0ae", "Marketing" },
+                    { "856cb1b1-7b59-4782-b35c-4bb1344788fa", "Product Management" },
+                    { "9ff197fe-35a1-450c-978e-2e0bd500668b", "Engineering" },
+                    { "a4e1ade6-03db-497e-b12b-467a5f4bc130", "Services" },
+                    { "b8797f95-cc86-47bd-b4e3-4edd7a7dba24", "Training" },
+                    { "cc232931-57f3-4681-84fd-3d34c524f816", "Research and Development" },
+                    { "e2da4790-1523-410e-a47b-e8323ad4a4f6", "Product Management" },
+                    { "e4a93b77-7cb4-455f-b826-86bf3fbdf79e", "Beszélgető" },
+                    { "ee3302b5-444c-4fc3-ba77-34ee40f5cc8a", "Human Resources" }
                 });
 
             migrationBuilder.InsertData(
                 table: "AspNetUserRoles",
                 columns: new[] { "RoleId", "UserId" },
-                values: new object[] { "1", "73f9905e-4153-4c83-a991-e283dc41a8cd" });
+                values: new object[] { "8fa25c3e-7ea0-4990-bf7d-bf9afba90b6a", "434ae560-46c7-407b-bc42-c366e7ca6f30" });
 
             migrationBuilder.InsertData(
-                table: "Messages",
-                columns: new[] { "Id", "ChatId", "Content", "MainMessageId", "Time", "UserId" },
-                values: new object[] { "e5a6a495-a3c6-4d3a-8451-6aff2f208804", "51d4e60b-b763-4f5a-9c0c-aa596c3ff64e", "Elso uzenet", null, new DateTime(2023, 3, 27, 21, 18, 22, 236, DateTimeKind.Local).AddTicks(3747), "73f9905e-4153-4c83-a991-e283dc41a8cd" });
+                table: "AspNetUserRoles",
+                columns: new[] { "RoleId", "UserId" },
+                values: new object[] { "57904da3-ce6b-4e24-8af5-e0119baf42da", "e368860c-9be4-402a-8d5f-cef41b26d9b5" });
+
+            migrationBuilder.InsertData(
+                table: "AspNetUserRoles",
+                columns: new[] { "RoleId", "UserId" },
+                values: new object[] { "7a124792-7f2a-4b2f-a5f3-222a4e1a5da0", "f0151a2e-cad2-4b84-b900-232f2cc6c714" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
@@ -375,17 +347,6 @@ namespace specchat.Migrations
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_DeviceCodes_DeviceCode",
-                table: "DeviceCodes",
-                column: "DeviceCode",
-                unique: true);
-
-            migrationBuilder.CreateIndex(
-                name: "IX_DeviceCodes_Expiration",
-                table: "DeviceCodes",
-                column: "Expiration");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Emojis_MessageId",
                 table: "Emojis",
                 column: "MessageId");
@@ -394,11 +355,6 @@ namespace specchat.Migrations
                 name: "IX_Emojis_UserId",
                 table: "Emojis",
                 column: "UserId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Keys_Use",
-                table: "Keys",
-                column: "Use");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Messages_ChatId",
@@ -414,26 +370,6 @@ namespace specchat.Migrations
                 name: "IX_Messages_UserId",
                 table: "Messages",
                 column: "UserId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_PersistedGrants_ConsumedTime",
-                table: "PersistedGrants",
-                column: "ConsumedTime");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_PersistedGrants_Expiration",
-                table: "PersistedGrants",
-                column: "Expiration");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_PersistedGrants_SubjectId_ClientId_Type",
-                table: "PersistedGrants",
-                columns: new[] { "SubjectId", "ClientId", "Type" });
-
-            migrationBuilder.CreateIndex(
-                name: "IX_PersistedGrants_SubjectId_SessionId_Type",
-                table: "PersistedGrants",
-                columns: new[] { "SubjectId", "SessionId", "Type" });
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -457,16 +393,7 @@ namespace specchat.Migrations
                 name: "ChatUsers");
 
             migrationBuilder.DropTable(
-                name: "DeviceCodes");
-
-            migrationBuilder.DropTable(
                 name: "Emojis");
-
-            migrationBuilder.DropTable(
-                name: "Keys");
-
-            migrationBuilder.DropTable(
-                name: "PersistedGrants");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");

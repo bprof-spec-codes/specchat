@@ -1,0 +1,41 @@
+.mat-form-field {
+    width: 100%;
+    min-width: 300px;
+  }
+
+  mat-card {
+    padding: 2rem;
+    color: white;
+  }
+
+  mat-card-title,
+  mat-card-content {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+  }
+
+  mat-card-content {
+    margin-top: 1.5rem;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .error {
+    padding: 16px;
+    width: 300px;
+    color: white;
+    background-color: red;
+  }
+
+  .button {
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  .account {
+    text-decoration: underline;
+    color: lightgreen;
+    cursor: pointer;
+    margin-top: 1rem;
+  }

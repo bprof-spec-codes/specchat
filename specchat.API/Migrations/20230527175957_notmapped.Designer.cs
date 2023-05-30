@@ -3,165 +3,26 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using specchat.Data;
+using specchat.API.Data;
 
 #nullable disable
 
-namespace specchat.Migrations
+namespace specchat.API.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230527175957_notmapped")]
+    partial class notmapped
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "6.0.14")
+                .HasAnnotation("ProductVersion", "6.0.16")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
-
-            modelBuilder.Entity("Duende.IdentityServer.EntityFramework.Entities.DeviceFlowCodes", b =>
-                {
-                    b.Property<string>("UserCode")
-                        .HasMaxLength(200)
-                        .HasColumnType("nvarchar(200)");
-
-                    b.Property<string>("ClientId")
-                        .IsRequired()
-                        .HasMaxLength(200)
-                        .HasColumnType("nvarchar(200)");
-
-                    b.Property<DateTime>("CreationTime")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Data")
-                        .IsRequired()
-                        .HasMaxLength(50000)
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Description")
-                        .HasMaxLength(200)
-                        .HasColumnType("nvarchar(200)");
-
-                    b.Property<string>("DeviceCode")
-                        .IsRequired()
-                        .HasMaxLength(200)
-                        .HasColumnType("nvarchar(200)");
-
-                    b.Property<DateTime?>("Expiration")
-                        .IsRequired()
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("SessionId")
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
-
-                    b.Property<string>("SubjectId")
-                        .HasMaxLength(200)
-                        .HasColumnType("nvarchar(200)");
-
-                    b.HasKey("UserCode");
-
-                    b.HasIndex("DeviceCode")
-                        .IsUnique();
-
-                    b.HasIndex("Expiration");
-
-                    b.ToTable("DeviceCodes", (string)null);
-                });
-
-            modelBuilder.Entity("Duende.IdentityServer.EntityFramework.Entities.Key", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("Algorithm")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
-
-                    b.Property<DateTime>("Created")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Data")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("DataProtected")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("IsX509Certificate")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("Use")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<int>("Version")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("Use");
-
-                    b.ToTable("Keys");
-                });
-
-            modelBuilder.Entity("Duende.IdentityServer.EntityFramework.Entities.PersistedGrant", b =>
-                {
-                    b.Property<string>("Key")
-                        .HasMaxLength(200)
-                        .HasColumnType("nvarchar(200)");
-
-                    b.Property<string>("ClientId")
-                        .IsRequired()
-                        .HasMaxLength(200)
-                        .HasColumnType("nvarchar(200)");
-
-                    b.Property<DateTime?>("ConsumedTime")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("CreationTime")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Data")
-                        .IsRequired()
-                        .HasMaxLength(50000)
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Description")
-                        .HasMaxLength(200)
-                        .HasColumnType("nvarchar(200)");
-
-                    b.Property<DateTime?>("Expiration")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("SessionId")
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
-
-                    b.Property<string>("SubjectId")
-                        .HasMaxLength(200)
-                        .HasColumnType("nvarchar(200)");
-
-                    b.Property<string>("Type")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.HasKey("Key");
-
-                    b.HasIndex("ConsumedTime");
-
-                    b.HasIndex("Expiration");
-
-                    b.HasIndex("SubjectId", "ClientId", "Type");
-
-                    b.HasIndex("SubjectId", "SessionId", "Type");
-
-                    b.ToTable("PersistedGrants", (string)null);
-                });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
@@ -192,9 +53,21 @@ namespace specchat.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "1",
-                            ConcurrencyStamp = "0f013ed5-7d82-4b0a-b409-ccaea75637e9",
-                            Name = "admin"
+                            Id = "d9ddb968-42f7-4dd7-b54c-a03ca743ec70",
+                            Name = "Admin",
+                            NormalizedName = "ADMIN"
+                        },
+                        new
+                        {
+                            Id = "fbc877ea-584f-445f-8d8c-8d296b4235cc",
+                            Name = "User",
+                            NormalizedName = "USER"
+                        },
+                        new
+                        {
+                            Id = "15f78bf6-95e5-482c-8fb7-3a3c03fe67b5",
+                            Name = "Teacher",
+                            NormalizedName = "TEACHER"
                         });
                 });
 
@@ -251,12 +124,10 @@ namespace specchat.Migrations
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
                     b.Property<string>("LoginProvider")
-                        .HasMaxLength(128)
-                        .HasColumnType("nvarchar(128)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("ProviderKey")
-                        .HasMaxLength(128)
-                        .HasColumnType("nvarchar(128)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("ProviderDisplayName")
                         .HasColumnType("nvarchar(max)");
@@ -289,8 +160,18 @@ namespace specchat.Migrations
                     b.HasData(
                         new
                         {
-                            UserId = "14c6c689-094f-45fa-b820-e52db96ec883",
-                            RoleId = "1"
+                            UserId = "f3a2b49e-8f8b-4118-9d89-7a9edf8980c9",
+                            RoleId = "d9ddb968-42f7-4dd7-b54c-a03ca743ec70"
+                        },
+                        new
+                        {
+                            UserId = "41a8d9e5-2169-4d06-8168-ccbf2e760e98",
+                            RoleId = "15f78bf6-95e5-482c-8fb7-3a3c03fe67b5"
+                        },
+                        new
+                        {
+                            UserId = "950850d4-6de3-4055-b419-04376d72a6dc",
+                            RoleId = "fbc877ea-584f-445f-8d8c-8d296b4235cc"
                         });
                 });
 
@@ -300,12 +181,10 @@ namespace specchat.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("LoginProvider")
-                        .HasMaxLength(128)
-                        .HasColumnType("nvarchar(128)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Name")
-                        .HasMaxLength(128)
-                        .HasColumnType("nvarchar(128)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Value")
                         .HasColumnType("nvarchar(max)");
@@ -315,7 +194,7 @@ namespace specchat.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("specchat.Models.ApplicationUser", b =>
+            modelBuilder.Entity("specchat.API.Models.ApplicationUser", b =>
                 {
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
@@ -336,11 +215,13 @@ namespace specchat.Migrations
 
                     b.Property<string>("FirstName")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
 
                     b.Property<string>("LastName")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
 
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("bit");
@@ -396,24 +277,58 @@ namespace specchat.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "14c6c689-094f-45fa-b820-e52db96ec883",
+                            Id = "f3a2b49e-8f8b-4118-9d89-7a9edf8980c9",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "70585baa-ab86-477b-9041-f92d630839aa",
-                            Email = "user@gmail.com",
+                            ConcurrencyStamp = "7b2766c2-b471-4a3e-9c8e-bd5767e8b952",
+                            Email = "admin@admin.adm",
+                            EmailConfirmed = true,
+                            FirstName = "Super",
+                            LastName = "User",
+                            LockoutEnabled = false,
+                            NormalizedUserName = "ADMINUSER",
+                            PasswordHash = "AQAAAAEAACcQAAAAEIieUJfMdjJAfuXwqRjuhOLfeeyQJFE6xJ5XkNLIn5cAvKPG7nw4mVqx/nRtQrQuRQ==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "eb1f9582-158b-4a02-b138-01d75aa48851",
+                            TwoFactorEnabled = false,
+                            UserName = "adminuser"
+                        },
+                        new
+                        {
+                            Id = "41a8d9e5-2169-4d06-8168-ccbf2e760e98",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "aac62a89-980b-440d-af20-c250f3a2ee0e",
+                            Email = "teacher@teach.er",
+                            EmailConfirmed = true,
+                            FirstName = "Teacher",
+                            LastName = "User",
+                            LockoutEnabled = false,
+                            NormalizedUserName = "TEACHEREX",
+                            PasswordHash = "AQAAAAEAACcQAAAAEFR5ma2IwOzzWvhKPYoSZoOmc0j8KScogASE2j/HERhtflBwbdlr/2AAjscc/fzS8A==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "981e0bab-2c90-47c9-a99d-9625b0e33378",
+                            TwoFactorEnabled = false,
+                            UserName = "teacherex"
+                        },
+                        new
+                        {
+                            Id = "950850d4-6de3-4055-b419-04376d72a6dc",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "c6aecef5-2e9d-4ff4-9510-82d16e0d9014",
+                            Email = "basic@us.er",
                             EmailConfirmed = true,
                             FirstName = "Basic",
                             LastName = "User",
                             LockoutEnabled = false,
-                            NormalizedUserName = "USER@GMAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEF/C9oUqMoG/kcuNtFkvXPQXHsf/HmPzKHyIkSs3QM6WRgXciAQTTFMUeMe4UKzLmg==",
+                            NormalizedUserName = "BASICUSER",
+                            PasswordHash = "AQAAAAEAACcQAAAAEOUrroQ6tEd2MEC9kTFM7+o/KwyauodNwa31xTqMWb3Sa+5rbrWCN5JnX1YVkbpHNA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "e68fef70-d9b7-4d0a-97cf-cbb07f94a723",
+                            SecurityStamp = "738bd87a-3110-47a7-9d13-d96b496e21d5",
                             TwoFactorEnabled = false,
-                            UserName = "user@gmail.com"
+                            UserName = "basicuser"
                         });
                 });
 
-            modelBuilder.Entity("specchat.Models.Chat", b =>
+            modelBuilder.Entity("specchat.API.Models.Chat", b =>
                 {
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
@@ -429,17 +344,72 @@ namespace specchat.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "03abea86-d22a-4fdd-a661-93fe44bed6c4",
-                            Name = "Beszélgető"
+                            Id = "ee3302b5-444c-4fc3-ba77-34ee40f5cc8a",
+                            Name = "Human Resources"
                         },
                         new
                         {
-                            Id = "0b75a61a-8f00-43b7-af82-4614071d7378",
+                            Id = "856cb1b1-7b59-4782-b35c-4bb1344788fa",
+                            Name = "Product Management"
+                        },
+                        new
+                        {
+                            Id = "28c07e65-9fb0-4900-9cd9-faa3f97704d9",
+                            Name = "Support"
+                        },
+                        new
+                        {
+                            Id = "e2da4790-1523-410e-a47b-e8323ad4a4f6",
+                            Name = "Product Management"
+                        },
+                        new
+                        {
+                            Id = "b8797f95-cc86-47bd-b4e3-4edd7a7dba24",
+                            Name = "Training"
+                        },
+                        new
+                        {
+                            Id = "70f0f02d-83de-490b-b42d-e37fff244f77",
+                            Name = "Engineering"
+                        },
+                        new
+                        {
+                            Id = "a4e1ade6-03db-497e-b12b-467a5f4bc130",
+                            Name = "Services"
+                        },
+                        new
+                        {
+                            Id = "76d422c9-6d26-42a4-a24b-aae84b4ad0ae",
+                            Name = "Marketing"
+                        },
+                        new
+                        {
+                            Id = "cc232931-57f3-4681-84fd-3d34c524f816",
+                            Name = "Research and Development"
+                        },
+                        new
+                        {
+                            Id = "9ff197fe-35a1-450c-978e-2e0bd500668b",
+                            Name = "Engineering"
+                        },
+                        new
+                        {
+                            Id = "06529009-e3f0-48a3-a57a-86b61b71cf9f",
                             Name = "Játékok"
+                        },
+                        new
+                        {
+                            Id = "1b60c271-fb5e-4f5e-bc81-e9a5b5f1ad78",
+                            Name = "Alamónium"
+                        },
+                        new
+                        {
+                            Id = "e4a93b77-7cb4-455f-b826-86bf3fbdf79e",
+                            Name = "Beszélgető"
                         });
                 });
 
-            modelBuilder.Entity("specchat.Models.ChatUser", b =>
+            modelBuilder.Entity("specchat.API.Models.ChatUser", b =>
                 {
                     b.Property<string>("ChatId")
                         .HasColumnType("nvarchar(450)");
@@ -454,7 +424,7 @@ namespace specchat.Migrations
                     b.ToTable("ChatUsers");
                 });
 
-            modelBuilder.Entity("specchat.Models.Emoji", b =>
+            modelBuilder.Entity("specchat.API.Models.Emoji", b =>
                 {
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
@@ -476,7 +446,7 @@ namespace specchat.Migrations
                     b.ToTable("Emojis");
                 });
 
-            modelBuilder.Entity("specchat.Models.Message", b =>
+            modelBuilder.Entity("specchat.API.Models.Message", b =>
                 {
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
@@ -511,17 +481,6 @@ namespace specchat.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("Messages");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = "c382c4d8-9fde-429b-91d5-396cc3e85565",
-                            ChatId = "03abea86-d22a-4fdd-a661-93fe44bed6c4",
-                            Content = "Elso uzenet",
-                            IsPinned = false,
-                            Time = new DateTime(2023, 4, 15, 22, 53, 21, 154, DateTimeKind.Local).AddTicks(2332),
-                            UserId = "14c6c689-094f-45fa-b820-e52db96ec883"
-                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -535,7 +494,7 @@ namespace specchat.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
-                    b.HasOne("specchat.Models.ApplicationUser", null)
+                    b.HasOne("specchat.API.Models.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -544,7 +503,7 @@ namespace specchat.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
-                    b.HasOne("specchat.Models.ApplicationUser", null)
+                    b.HasOne("specchat.API.Models.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -559,7 +518,7 @@ namespace specchat.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("specchat.Models.ApplicationUser", null)
+                    b.HasOne("specchat.API.Models.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -568,22 +527,22 @@ namespace specchat.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
-                    b.HasOne("specchat.Models.ApplicationUser", null)
+                    b.HasOne("specchat.API.Models.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("specchat.Models.ChatUser", b =>
+            modelBuilder.Entity("specchat.API.Models.ChatUser", b =>
                 {
-                    b.HasOne("specchat.Models.Chat", "Chat")
+                    b.HasOne("specchat.API.Models.Chat", "Chat")
                         .WithMany("ChatUsers")
                         .HasForeignKey("ChatId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
-                    b.HasOne("specchat.Models.ApplicationUser", "User")
+                    b.HasOne("specchat.API.Models.ApplicationUser", "User")
                         .WithMany("ChatUsers")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.NoAction)
@@ -594,15 +553,15 @@ namespace specchat.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("specchat.Models.Emoji", b =>
+            modelBuilder.Entity("specchat.API.Models.Emoji", b =>
                 {
-                    b.HasOne("specchat.Models.Message", "Message")
+                    b.HasOne("specchat.API.Models.Message", "Message")
                         .WithMany("Emojis")
                         .HasForeignKey("MessageId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
-                    b.HasOne("specchat.Models.ApplicationUser", "User")
+                    b.HasOne("specchat.API.Models.ApplicationUser", "User")
                         .WithMany("Emojis")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.NoAction)
@@ -613,20 +572,20 @@ namespace specchat.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("specchat.Models.Message", b =>
+            modelBuilder.Entity("specchat.API.Models.Message", b =>
                 {
-                    b.HasOne("specchat.Models.Chat", "Chat")
+                    b.HasOne("specchat.API.Models.Chat", "Chat")
                         .WithMany("Messages")
                         .HasForeignKey("ChatId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
-                    b.HasOne("specchat.Models.Message", "MainMessage")
+                    b.HasOne("specchat.API.Models.Message", "MainMessage")
                         .WithMany("SubMessage")
                         .HasForeignKey("MainMessageId")
                         .OnDelete(DeleteBehavior.NoAction);
 
-                    b.HasOne("specchat.Models.ApplicationUser", "User")
+                    b.HasOne("specchat.API.Models.ApplicationUser", "User")
                         .WithMany("Messages")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.NoAction)
@@ -639,7 +598,7 @@ namespace specchat.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("specchat.Models.ApplicationUser", b =>
+            modelBuilder.Entity("specchat.API.Models.ApplicationUser", b =>
                 {
                     b.Navigation("ChatUsers");
 
@@ -648,14 +607,14 @@ namespace specchat.Migrations
                     b.Navigation("Messages");
                 });
 
-            modelBuilder.Entity("specchat.Models.Chat", b =>
+            modelBuilder.Entity("specchat.API.Models.Chat", b =>
                 {
                     b.Navigation("ChatUsers");
 
                     b.Navigation("Messages");
                 });
 
-            modelBuilder.Entity("specchat.Models.Message", b =>
+            modelBuilder.Entity("specchat.API.Models.Message", b =>
                 {
                     b.Navigation("Emojis");
 

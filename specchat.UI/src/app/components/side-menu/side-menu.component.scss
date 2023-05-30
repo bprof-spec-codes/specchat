@@ -1,0 +1,11 @@
+@import '../../../styles.scss';
+
+nav {
+    height: 100%;
+    width: 240px;
+    background-color: $color-primary;
+}
+
+.selected {
+    background-color: $color-secondary;
+}

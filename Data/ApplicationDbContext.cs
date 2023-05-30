@@ -5,6 +5,7 @@ using Duende.IdentityServer.EntityFramework.Options;
 using specchat.Models;
 using System.IO;
 using Microsoft.AspNetCore.Identity;
+using Newtonsoft.Json;
 
 namespace specchat.Data;
 
@@ -72,6 +73,28 @@ public class ApplicationDbContext : ApiAuthorizationDbContext<ApplicationUser>
 
 
         PasswordHasher<ApplicationUser> ph = new PasswordHasher<ApplicationUser>();
+
+		var users = JsonConvert.DeserializeObject<List<ApplicationUser>>(File.ReadAllText("Data/SeedData/gusers.json"));
+		users.ForEach(u => u.PasswordHash = ph.HashPassword(u, "password"));
+		var chatUsers = JsonConvert.DeserializeObject<List<ChatUser>>(File.ReadAllText("Data/SeedData/gchatuser.json"));
+		chatUsers = chatUsers.Distinct().ToList();
+
+        
+        builder.Entity<Chat>()
+            .HasData(JsonConvert.DeserializeObject<List<Chat>>(File.ReadAllText("Data/SeedData/gchats.json")));
+        builder.Entity<ChatUser>()
+            .HasData(chatUsers);
+        builder.Entity<Message>()
+            .HasData(JsonConvert.DeserializeObject<List<Message>>(File.ReadAllText("Data/SeedData/gmessages.json")));
+        builder.Entity<Emoji>()
+            .HasData(JsonConvert.DeserializeObject<List<Emoji>>(File.ReadAllText("Data/SeedData/gemojis.json")));
+        builder.Entity<IdentityRole>()
+            .HasData(JsonConvert.DeserializeObject<List<IdentityRole>>(File.ReadAllText("Data/SeedData/groles.json")));
+        builder.Entity<IdentityUserRole<string>>()
+            .HasData(JsonConvert.DeserializeObject<List<IdentityUserRole<string>>>(File.ReadAllText("Data/SeedData/guserroles.json")));
+        
+		//List<ApplicationUser> users = new List<ApplicationUser>();
+
 		ApplicationUser kovi = new ApplicationUser
 		{
 			Id = Guid.NewGuid().ToString(),
@@ -83,30 +106,105 @@ public class ApplicationDbContext : ApiAuthorizationDbContext<ApplicationUser>
 			LastName = "User"
 		};
 
-		builder.Entity<IdentityRole>().HasData(new IdentityRole()
-		{
-			Id = "1",
-			Name = "admin",
-		});
+        users.Add(kovi);
+        kovi.PasswordHash = ph.HashPassword(kovi, "password");
+        builder.Entity<ApplicationUser>()
+            .HasData(users);
+        /*
+        ApplicationUser simpleUser = new ApplicationUser
+        {
+            Id = Guid.NewGuid().ToString(),
+            Email = "simple@gmail.com",
+            EmailConfirmed = true,
+            UserName = "simple@gmail.com",
+            NormalizedUserName = "SIMPLE@GMAIL.COM",
+            FirstName = "Simple",
+            LastName = "User"
+        };
 
-		builder.Entity<IdentityUserRole<string>>().HasData(new IdentityUserRole<string>()
+        ApplicationUser teacher = new ApplicationUser
+        {
+            Id = Guid.NewGuid().ToString(),
+            Email = "teacher@gmail.com",
+            EmailConfirmed = true,
+            UserName = "teacher@gmail.com",
+            NormalizedUserName = "TEACHER@GMAIL.COM",
+            FirstName = "Teacher",
+            LastName = "Teacher_last"
+        };
+        
+		users.Add(simpleUser);
+		users.Add(teacher);
+
+		List<IdentityRole> roles = new List<IdentityRole>();
+
+		IdentityRole admin = (new IdentityRole()
+        {
+            Id = "1",
+            Name = "admin",
+        });
+
+        IdentityRole simple = (new IdentityRole()
+        {
+            Id = "2",
+            Name = "simple",
+        });
+
+        IdentityRole teacherRole = (new IdentityRole()
+        {
+            Id = "3",
+            Name = "Teacher",
+        });
+
+        roles.Add(admin);
+		roles.Add(simple);
+		roles.Add(teacherRole);
+
+        builder.Entity<IdentityRole>().HasData(roles);
+
+        
+        simpleUser.PasswordHash = ph.HashPassword(simpleUser, "passw0rd");
+        teacher.PasswordHash = ph.HashPassword(teacher, "teacherpass");
+
+        builder.Entity<ApplicationUser>().HasData(users);
+
+        builder.Entity<IdentityUserRole<string>>().HasData(new IdentityUserRole<string>()
 		{
 			RoleId = "1",
 			UserId = kovi.Id
 		});
 
-		kovi.PasswordHash = ph.HashPassword(kovi, "password");
-		builder.Entity<ApplicationUser>().HasData(kovi);
+        builder.Entity<IdentityUserRole<string>>().HasData(new IdentityUserRole<string>()
+        {
+            RoleId = "2",
+            UserId = simpleUser.Id
+        });
+
+        builder.Entity<IdentityUserRole<string>>().HasData(new IdentityUserRole<string>()
+        {
+            RoleId = "3",
+            UserId = teacher.Id
+        });
+
+		List<Chat> chats = new List<Chat>();
 
 		Chat c1 = new Chat()
 		{
 			Name = "Beszélgető"
 		};
+		chats.Add(c1);
 		Chat c2 = new Chat()
 		{
 			Name = "Játékok"
 		};
-		builder.Entity<Chat>().HasData(c1 ,c2);
+		chats.Add(c2);
+
+        Chat c3 = new Chat()
+        {
+            Name = "Alamónium"
+        };
+        chats.Add(c3);
+        builder.Entity<Chat>().HasData(chats);
 		// DB migration elhasalt tőle 
 		//builder.Entity<Emoji>().HasData(new Emoji[]
 		//{
@@ -115,6 +213,8 @@ public class ApplicationDbContext : ApiAuthorizationDbContext<ApplicationUser>
 		//	new Emoji("U+1F970"),
 		//	new Emoji("U+1F60D")
 		//});
+		List<Message> messages = new List<Message>();
+
 		Message msg1 = new Message()
 		{
 			Content = "Elso uzenet",
@@ -122,8 +222,40 @@ public class ApplicationDbContext : ApiAuthorizationDbContext<ApplicationUser>
 			UserId = kovi.Id,
 			ChatId = c1.Id
 		};
-		builder.Entity<Message>().HasData(msg1);
-		base.OnModelCreating(builder);
+		messages.Add(msg1);
+
+        Message msg2 = new Message()
+        {
+            Content = "Masodik Uzenet",
+            Time = DateTime.Now,
+            UserId = kovi.Id,
+            ChatId = c2.Id
+        };
+		messages.Add(msg2);
+
+		Message msg3 = new Message()
+		{
+			Content = "harmadik uzenet",
+			Time = DateTime.Now,
+			UserId = kovi.Id,
+			ChatId = c3.Id
+		};
+
+		Message msg4 = new Message()
+		{
+			Content = "negyedik uzenet",
+			Time = DateTime.Now,
+			UserId = kovi.Id,
+			ChatId = c2.Id,
+			MainMessageId = msg3.Id
+		};
+		//msg3.SubMessage.Add(msg4);
+		messages.Add(msg3);
+		messages.Add(msg4);
+
+		builder.Entity<Message>().HasData(messages);
+		*/
+        base.OnModelCreating(builder);
 	}
 }
 

@@ -5,6 +5,11 @@ namespace specchat.Models
 {
     public class ChatUser
     {
+        public ChatUser()
+        {
+            ChatId = Guid.NewGuid().ToString();
+        }
+
         public string ChatId { get; set; }
 
         [JsonIgnore]

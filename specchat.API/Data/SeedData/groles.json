@@ -1,0 +1,17 @@
+[
+  {
+    "Id": "246904db-4b9c-410c-93cb-090b3fa93c9f",
+    "Name": "Admin",
+    "NormalizedName": "ADMIN"
+  },
+  {
+    "Id": "f0fb3eeb-4385-4952-83e9-4ccaf78b9064",
+    "Name": "Teacher",
+    "NormalizedName": "TEACHER"
+  },
+  {
+    "Id": "622c52c3-b3ba-4b0e-a41f-dcd07f3e4779",
+    "Name": "User",
+    "NormalizedName": "USER"
+  }
+]

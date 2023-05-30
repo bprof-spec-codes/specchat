@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { Chat } from './models/chat';
+import { Message } from './models/message';
 
 @Component({
   selector: 'app-root',
@@ -7,5 +9,18 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'app';
+
+  selectedChat?: any;
+  selectedMessage?: any;
+
+  onThreadSelected(event: Event) {
+    const threadId = (event.target as HTMLDivElement).innerText.trim();
+    console.log(`Selected thread ID: ${threadId}`);
+  }
+
+  onMessageSelected(event: Event) {
+    const threadId = (event.target as HTMLDivElement).innerText.trim();
+    console.log(`Selected thread ID: ${threadId}`);
+  }
 }
 
