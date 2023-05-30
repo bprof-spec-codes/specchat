@@ -17,8 +17,10 @@ var connectionString = builder.Configuration.GetConnectionString("DefaultConnect
 
 builder.Services.AddTransient<IMessageRepository, MessageRepository>();
 builder.Services.AddTransient<IChatRepository, ChatRepository>();
+builder.Services.AddTransient<IEmojiRepository, EmojiRepository>();
 builder.Services.AddTransient<IChatLogic, ChatLogic>();
 builder.Services.AddTransient<IMessageLogic, MessageLogic>();
+builder.Services.AddTransient<IEmojiLogic, EmojiLogic>();
 
 
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
