@@ -1,0 +1,30 @@
+<div class="p-2 max-w-md">
+    <div class="d-flex justify-content-between align-items-start">
+      <h1>Login</h1>
+    </div>
+    <div>
+      <div class="d-flex flex-column gap-4 justify-content-center align-items-center">
+        <form [formGroup]="loginForm">
+          <div class="form-group">
+            <label for="email">Username</label>
+            <input type="text" class="form-control" id="username" formControlName="username" required>
+          </div>
+          <div class="form-group">
+            <label for="password">Password</label>
+            <div class="input-group">
+              <input [type]="hide ? 'password' : 'text'" class="form-control" id="password" formControlName="password" required>
+              <button class="btn btn-outline-secondary" type="button" (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                <i class="bi bi-eye{{ hide ? '-slash' : '' }}"></i>
+              </button>
+            </div>
+          </div>
+          <p *ngIf="loginFailed" style="color: red">Email or password is incorrect</p>
+        </form>
+        <button class="btn btn-primary" (click)="login()" [disabled]="loginForm.invalid">Login</button>
+        <hr class="border-gray-500 w-100">
+        <span>Don't have an account?</span>
+        <a class="text-teal-400 underline" (click)="openRegistration()">Sign Up</a>
+      </div>
+    </div>
+  </div>
+  
