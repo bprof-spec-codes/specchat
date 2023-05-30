@@ -1,8 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using specchat.API.Data.Logics;
+using specchat.API.Data.Logics.Logic_Interfaces;
 using specchat.API.Models;
 
-namespace specchat.Controllers
+namespace specchat.API.Controllers
 {
     [Route("api/[controller]")]
     public class MessageController : Controller

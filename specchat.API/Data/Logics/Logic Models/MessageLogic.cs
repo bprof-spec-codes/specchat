@@ -2,8 +2,10 @@
 using specchat.API.Data.Logics;
 using specchat.API.Models;
 using specchat.API.Data.Repositories;
+using specchat.API.Data.Repositories.Repository_Intefaces;
+using specchat.API.Data.Logics.Logic_Interfaces;
 
-namespace specchat.Data.Logics.Model_Logics
+namespace specchat.API.Data.Logics.Logic_Models
 {
     public class MessageLogic : IMessageLogic
     {

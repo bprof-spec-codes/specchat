@@ -1,6 +1,6 @@
 ﻿using specchat.API.Models;
 
-namespace specchat.API.Data.Repositories
+namespace specchat.API.Data.Repositories.Repository_Intefaces
 {
     public interface IChatRepository
     {

@@ -47,17 +47,9 @@
     <None Remove="Models\ViewModels\" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Data\" />
     <Folder Include="Migrations\" />
     <Folder Include="Models\" />
-    <Folder Include="Data\Logics\" />
-    <Folder Include="Data\Repositories\" />
     <Folder Include="Data\SeedData\" />
-    <Folder Include="Data\Logics\Logic Interfaces\" />
-    <Folder Include="Data\Logics\Logic Models\" />
-    <Folder Include="Data\Repositories\Repository Intefaces\" />
-    <Folder Include="Data\Repositories\Repository Models\" />
-    <Folder Include="Controllers\" />
     <Folder Include="Models\ViewModels\" />
   </ItemGroup>
 </Project>

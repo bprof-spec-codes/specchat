@@ -5,12 +5,17 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using specchat.API.Data;
-using specchat.API.Data.Logics;
-using specchat.API.Data.Repositories;
+using specchat.API.Data.Logics.Logic_Interfaces;
+using specchat.API.Data.Logics.Logic_Models;
+//using specchat.API.Data;
+//using specchat.API.Data.Logics;
+//using specchat.API.Data.Repositories;
+using specchat.API.Data.Repositories.Repository_Intefaces;
+using specchat.API.Data.Repositories.Repository_Models;
 using specchat.API.Models;
-using specchat.Data.Logics;
-using specchat.Data.Logics.Model_Logics;
-using specchat.Data.Repositories;
+//using specchat.Data.Logics;
+//using specchat.Data.Logics.Model_Logics;
+//using specchat.Data.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -19,10 +24,12 @@ var connectionString = builder.Configuration.GetConnectionString("DefaultConnect
 
 builder.Services.AddTransient<IMessageRepository, MessageRepository>();
 builder.Services.AddTransient<IChatRepository, ChatRepository>();
-builder.Services.AddTransient<IChatLogic, ChatLogic>();
-builder.Services.AddTransient<IMessageLogic, MessageLogic>();
-builder.Services.AddTransient<IApplicationUserLogic, ApplicationUserLogic>();
+builder.Services.AddTransient<IEmojiRepository, EmojiRepository>();
 builder.Services.AddTransient<IApplicationUserRepository, ApplicationUserRepository>();
+builder.Services.AddTransient<IMessageLogic, MessageLogic>();
+builder.Services.AddTransient<IChatLogic, ChatLogic>();
+builder.Services.AddTransient<IEmojiLogic, EmojiLogic>();
+builder.Services.AddTransient<IApplicationUserLogic, ApplicationUserLogic>();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

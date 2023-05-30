@@ -1,11 +1,12 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using specchat.API.Data;
 using specchat.API.Data.Repositories;
+using specchat.API.Data.Repositories.Repository_Intefaces;
 using specchat.API.Models;
 using System;
 using System.Security.Cryptography;
 
-namespace specchat.Data.Repositories
+namespace specchat.API.Data.Repositories.Repository_Models
 {
     public class ChatRepository : IChatRepository
     {

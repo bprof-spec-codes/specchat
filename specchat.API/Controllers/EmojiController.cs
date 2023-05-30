@@ -1,30 +1,25 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using specchat.API.Data.Logics;
 using specchat.API.Data.Logics.Logic_Interfaces;
 using specchat.API.Models;
-using System;
-using System.Collections.Generic;
 
 namespace specchat.API.Controllers
 {
-    [ApiController]
-    [Route("[controller]")]
-    public class ChatController : ControllerBase
+    [Route("api/[controller]")]
+    public class EmojiController : Controller
     {
-        private readonly IChatLogic _chatLogic;
+        private readonly IEmojiLogic _emojiLogic;
 
-        public ChatController(IChatLogic chatLogic)
+        public EmojiController(IEmojiLogic emojiLogic)
         {
-            _chatLogic = chatLogic;
+            _emojiLogic = emojiLogic;
         }
 
         [HttpPost]
-        public void AddNewChat([FromBody] Chat chat)
+        public void AddNewEmoji([FromBody] Emoji emoji)
         {
             try
             {
-                _chatLogic.AddNewChat(chat);
+                _emojiLogic.AddNewEmoji(emoji);
             }
             catch (Exception e)
             {
@@ -33,11 +28,11 @@ namespace specchat.API.Controllers
         }
 
         [HttpDelete("{id}")]
-        public void DeleteChat(string id)
+        public void DeleteEmoji(string id)
         {
             try
             {
-                _chatLogic.DeleteChat(id);
+                _emojiLogic.DeleteEmoji(id);
             }
             catch (Exception e)
             {
@@ -46,17 +41,17 @@ namespace specchat.API.Controllers
         }
 
         [HttpGet]
-        public IEnumerable<Chat> GetAll()
+        public IEnumerable<Emoji> GetAll()
         {
-            return _chatLogic.GetAll();
+            return _emojiLogic.GetAll();
         }
 
         [HttpGet("{id}")]
-        public Chat GetById(string id)
+        public Emoji GetById(string id)
         {
             try
             {
-                return _chatLogic.GetById(id);
+                return _emojiLogic.GetById(id);
             }
             catch (Exception e)
             {
@@ -66,11 +61,11 @@ namespace specchat.API.Controllers
         }
 
         [HttpPut]
-        public void UpdateChat([FromBody] Chat chat)
+        public void UpdateEmoji([FromBody] Emoji emoji)
         {
             try
             {
-                _chatLogic.UpdateChat(chat);
+                _emojiLogic.UpdateEmoji(emoji);
             }
             catch (Exception e)
             {

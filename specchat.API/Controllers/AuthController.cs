@@ -12,11 +12,11 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using Newtonsoft.Json.Linq;
-using specchat.Data.Logics;
+using specchat.API.Data.Logics.Logic_Interfaces;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
-namespace InvestmentApp.API.Controllers
+namespace specchat.API.Controllers
 {
     [ApiController]
     [Route("[controller]/[action]")]

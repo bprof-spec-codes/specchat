@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using specchat.API.Models;
 
-namespace specchat.API.Data.Logics
+namespace specchat.API.Data.Logics.Logic_Interfaces
 {
     public interface IApplicationUserLogic
     {

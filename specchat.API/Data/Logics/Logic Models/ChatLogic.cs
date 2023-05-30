@@ -3,9 +3,10 @@ using Microsoft.AspNetCore.Mvc;
 using specchat.API.Data.Logics;
 using specchat.API.Models;
 using specchat.API.Data.Repositories;
-using specchat.Data.Repositories;
+using specchat.API.Data.Repositories.Repository_Intefaces;
+using specchat.API.Data.Logics.Logic_Interfaces;
 
-namespace specchat.Data.Logics
+namespace specchat.API.Data.Logics.Logic_Models
 {
     public class ChatLogic : IChatLogic
     {
