@@ -73,13 +73,13 @@ public class ApplicationDbContext : ApiAuthorizationDbContext<ApplicationUser>
 
 
         PasswordHasher<ApplicationUser> ph = new PasswordHasher<ApplicationUser>();
+
 		var users = JsonConvert.DeserializeObject<List<ApplicationUser>>(File.ReadAllText("Data/SeedData/gusers.json"));
-		users.ForEach(u => u.PasswordHash = ph.HashPassword(u, u.PasswordHash));
+		users.ForEach(u => u.PasswordHash = ph.HashPassword(u, "password"));
 		var chatUsers = JsonConvert.DeserializeObject<List<ChatUser>>(File.ReadAllText("Data/SeedData/gchatuser.json"));
 		chatUsers = chatUsers.Distinct().ToList();
 
-        builder.Entity<ApplicationUser>()
-			.HasData(users);
+        
         builder.Entity<Chat>()
             .HasData(JsonConvert.DeserializeObject<List<Chat>>(File.ReadAllText("Data/SeedData/gchats.json")));
         builder.Entity<ChatUser>()
@@ -92,8 +92,8 @@ public class ApplicationDbContext : ApiAuthorizationDbContext<ApplicationUser>
             .HasData(JsonConvert.DeserializeObject<List<IdentityRole>>(File.ReadAllText("Data/SeedData/groles.json")));
         builder.Entity<IdentityUserRole<string>>()
             .HasData(JsonConvert.DeserializeObject<List<IdentityUserRole<string>>>(File.ReadAllText("Data/SeedData/guserroles.json")));
-        /*
-		List<ApplicationUser> users = new List<ApplicationUser>();
+        
+		//List<ApplicationUser> users = new List<ApplicationUser>();
 
 		ApplicationUser kovi = new ApplicationUser
 		{
@@ -106,6 +106,11 @@ public class ApplicationDbContext : ApiAuthorizationDbContext<ApplicationUser>
 			LastName = "User"
 		};
 
+        users.Add(kovi);
+        kovi.PasswordHash = ph.HashPassword(kovi, "password");
+        builder.Entity<ApplicationUser>()
+            .HasData(users);
+        /*
         ApplicationUser simpleUser = new ApplicationUser
         {
             Id = Guid.NewGuid().ToString(),
@@ -127,7 +132,7 @@ public class ApplicationDbContext : ApiAuthorizationDbContext<ApplicationUser>
             FirstName = "Teacher",
             LastName = "Teacher_last"
         };
-        users.Add(kovi);
+        
 		users.Add(simpleUser);
 		users.Add(teacher);
 
@@ -157,7 +162,7 @@ public class ApplicationDbContext : ApiAuthorizationDbContext<ApplicationUser>
 
         builder.Entity<IdentityRole>().HasData(roles);
 
-        kovi.PasswordHash = ph.HashPassword(kovi, "password");
+        
         simpleUser.PasswordHash = ph.HashPassword(simpleUser, "passw0rd");
         teacher.PasswordHash = ph.HashPassword(teacher, "teacherpass");
 
