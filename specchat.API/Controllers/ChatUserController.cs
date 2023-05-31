@@ -23,7 +23,7 @@ namespace specchat.API.Controllers
             _chatLogic = chatLogic;
         }
 
-        [HttpGet("{userid}")]
+        [HttpGet("Chat/{userid}")]
         public IEnumerable<Chat> GetByUser(string userid)
         {
             try
@@ -54,6 +54,29 @@ namespace specchat.API.Controllers
             }
             
             
+        }
+
+        [HttpDelete]
+        public IActionResult DeleteUserFromChat(string chatid, string userid)
+        {
+            var isit = _chatLogic.IsUserInChat(chatid, userid);
+
+            if (isit)
+            {
+                _chatLogic.RemoveUserFromChat(chatid, userid);
+                return Ok();
+            }
+            else
+            {
+                return BadRequest("User is not in chat");
+            }
+
+        }
+
+        [HttpGet("User/{chatid}")]
+        public IEnumerable<ApplicationUser> GetByChat(string chatid)
+        {
+            return _chatLogic.GetByChatId(chatid);
         }
     }
 }

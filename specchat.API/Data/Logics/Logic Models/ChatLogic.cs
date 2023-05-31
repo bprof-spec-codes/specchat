@@ -57,9 +57,19 @@ namespace specchat.API.Data.Logics.Logic_Models
             rep.AddUserToChat(chatId, userId);
         }
 
+        public void RemoveUserFromChat(string chatid, string userId)
+        {
+            rep.RemoveUserFromChat(chatid, userId);
+        }
+
         public bool IsUserInChat(string chatId, string userId)
         {
             return rep.IsUserInChat(chatId, userId);
+        }
+
+        public IEnumerable<ApplicationUser> GetByChatId(string chatId)
+        {
+            return rep.GetByChatId(chatId);
         }
     }
 }

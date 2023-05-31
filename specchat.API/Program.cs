@@ -7,15 +7,9 @@ using Microsoft.IdentityModel.Tokens;
 using specchat.API.Data;
 using specchat.API.Data.Logics.Logic_Interfaces;
 using specchat.API.Data.Logics.Logic_Models;
-//using specchat.API.Data;
-//using specchat.API.Data.Logics;
-//using specchat.API.Data.Repositories;
 using specchat.API.Data.Repositories.Repository_Intefaces;
 using specchat.API.Data.Repositories.Repository_Models;
 using specchat.API.Models;
-//using specchat.Data.Logics;
-//using specchat.Data.Logics.Model_Logics;
-//using specchat.Data.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -47,7 +41,6 @@ builder.Services.AddCors(options => options.AddPolicy(name: "SpecChatOrigins",
 
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(connectionString)
-    //options.UseSqlite(connectionString)
     .UseLazyLoadingProxies());
 
 builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options =>
