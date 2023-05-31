@@ -47,7 +47,7 @@ namespace specchat.API.Controllers
         }
 
         [HttpGet("{id}")]
-        public Emoji GetById(string id)
+        public IEnumerable<Emoji> GetById(string id)
         {
             try
             {

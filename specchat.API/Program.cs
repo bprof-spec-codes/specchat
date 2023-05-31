@@ -3,6 +3,7 @@ using System.Text.Json.Serialization;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.FileProviders;
 using Microsoft.IdentityModel.Tokens;
 using specchat.API.Data;
 using specchat.API.Data.Logics.Logic_Interfaces;
@@ -87,6 +88,12 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseCors("SpecChatOrigins");
+app.UseStaticFiles(new StaticFileOptions
+{
+    FileProvider = new PhysicalFileProvider(
+           Path.Combine(builder.Environment.ContentRootPath, "wwwroot", "savedChats")),
+    RequestPath = "/Saves"
+});
 
 app.UseHttpsRedirection();
 

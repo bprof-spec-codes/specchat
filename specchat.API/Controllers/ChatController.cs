@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using specchat.API.Data.Logics;
 using specchat.API.Data.Logics.Logic_Interfaces;
 using specchat.API.Models;
+using specchat.API.Models.ViewModels;
 using System;
 using System.Collections.Generic;
 
@@ -76,6 +77,17 @@ namespace specchat.API.Controllers
             {
                 Console.WriteLine(DateTime.Now.ToShortTimeString() + "Error: " + e.Message);
             }
+        }
+        [HttpPost("UploadFile")]
+        public string UploadFile([FromBody] SaveChatViewModel content)
+        {
+            var fileName = DateTime.Now.Year.ToString() + DateTime.Now.Month.ToString() + DateTime.Now.Day.ToString() + content.ChatName + ".json";
+            var filePath = Path.Combine(Directory.GetCurrentDirectory(), @"wwwroot\savedChats", fileName);
+            using (StreamWriter sw = new StreamWriter(filePath))
+            {
+                sw.Write(content.Content);
+            }
+            return fileName.ToString();
         }
     }
 }

@@ -8,7 +8,7 @@ namespace specchat.API.Data.Logics.Logic_Interfaces
         void AddNewEmoji([FromBody] Emoji emoji);
         void DeleteEmoji(string id);
         IEnumerable<Emoji> GetAll();
-        Emoji GetById(string id);
+        IEnumerable<Emoji> GetById(string id);
         void UpdateEmoji([FromBody] Emoji emoji);
     }
 }
