@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
+import { EditorModule, TINYMCE_SCRIPT_SRC } from '@tinymce/tinymce-angular';
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ThreadListComponent } from './components/thread-list/thread-list.component';
@@ -34,7 +36,8 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
     HttpClientModule,
     ReactiveFormsModule,
     FormsModule,
-    AppRoutingModule
+    AppRoutingModule,
+    EditorModule
   ],
   providers: [
     {
@@ -42,6 +45,10 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
       useClass: AuthInterceptor,
       multi: true,
     },
+    { 
+      provide: TINYMCE_SCRIPT_SRC, 
+      useValue: 'tinymce/tinymce.min.js' 
+    }
   ],
   bootstrap: [AppComponent]
 })

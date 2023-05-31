@@ -4,6 +4,7 @@ import { Message } from '../../_models/message';
 import { Chat } from '../../_models/chat';
 import { User } from 'src/app/_models/user';
 import { AuthService } from 'src/app/services/auth.service';
+import { EditorComponent } from '@tinymce/tinymce-angular';
 
 @Component({
   selector: 'app-thread-list',
@@ -18,7 +19,8 @@ export class ThreadListComponent implements OnInit {
 
   @Output() selectedMainMessage = new EventEmitter<Message>();
   
-  constructor(private messageService: MessageService, private authService: AuthService) {}
+  constructor(private messageService: MessageService, private authService: AuthService) {
+  }
 
   @Input() set selectedThread(chat: Chat) {
     this.selectedChat = chat;

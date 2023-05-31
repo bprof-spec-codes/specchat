@@ -33,9 +33,11 @@ namespace specchat.API.Data.Logics.Logic_Models
             return rep.Read();
         }
 
-        public Emoji GetById(string id)
+        public IEnumerable<Emoji> GetById(string id)
         {
-            return rep.Read(id);
+            return from x in rep.Read()
+                   where x.MessageId == id
+                   select x;
         }
 
         public void UpdateEmoji([FromBody] Emoji emoji)
