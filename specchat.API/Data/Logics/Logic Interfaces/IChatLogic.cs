@@ -13,5 +13,7 @@ namespace specchat.API.Data.Logics.Logic_Interfaces
         void DeleteChat(string id);
         void AddUserToChat(string chatId, string userId);
         bool IsUserInChat(string chatId, string userId);
+        IEnumerable<ApplicationUser> GetByChatId(string chatId);
+        void RemoveUserFromChat(string chatid, string userId);
     }
 }

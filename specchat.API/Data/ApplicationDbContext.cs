@@ -74,6 +74,11 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
             .HasForeignKey(t => t.MessageId)
             .OnDelete(DeleteBehavior.NoAction);
 
+        builder.Entity<Chat>()
+            .HasMany(t => t.ChatUsers)
+            .WithOne(t => t.Chat)
+            .OnDelete(DeleteBehavior.Cascade);
+
         string adminRoleId = Guid.NewGuid().ToString();
         string teacherRoleId = Guid.NewGuid().ToString();
         string userRoleId = Guid.NewGuid().ToString();

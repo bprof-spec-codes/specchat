@@ -16,12 +16,14 @@ export class DashboardComponent implements OnInit {
   users: User[] = [];
   selectedChatId: string = '';
   selectedUserId: string = '';
-  router: Router
-  errormessage: string = "";
+  chatStates: { [key: string]: boolean } = {};
+  router: Router;
+  errorMessage: string = "";
   newChatName: string = "";
+  chatusers: User[] = [];
 
   constructor(private chatService: ChatService, private authService: AuthService, router: Router) {
-    this.router = router
+    this.router = router;
   }
 
   ngOnInit(): void {
@@ -32,6 +34,7 @@ export class DashboardComponent implements OnInit {
   loadChats(): void {
     this.chatService.getAllChats().subscribe((result: Chat[]) => {
       this.chats = result;
+      console.log(this.chats)
     });
   }
 
@@ -41,14 +44,40 @@ export class DashboardComponent implements OnInit {
     });
   }
 
+  loadChatUsers(chatId: string): void {
+    for (const id in this.chatStates) {
+      if (id !== chatId) {
+        this.chatStates[id] = false; // Close other collapsible areas
+      }
+    }
+    
+    this.chatStates[chatId] = !this.chatStates[chatId]; // Toggle the state of the clicked collapsible area
+    
+    if (this.chatStates[chatId]) {
+    this.chatService.getUserByChatId(chatId).subscribe((result: User[]) => {
+      console.log(result)
+      this.chatusers = result
+    })
+    }
+  }
+
   addUserToChat(): void {
     if (this.selectedChatId && this.selectedUserId) {
       this.chatService.addUserToChat(this.selectedChatId, this.selectedUserId).subscribe(() => {
         console.log("Success");
       }, error => {
-        this.errormessage = "User already in chat";
+        this.errorMessage = "User already in chat";
       });
     }
+  }
+
+  removeUserFromChat(chatId: string, userId: string) {
+    this.chatService.removeUserFromChat(chatId, userId).subscribe(() => {
+      console.log("Success");
+      this.loadChatUsers(chatId)
+    }, error => {
+      this.errorMessage = "Failed to remove user from chat";
+    });
   }
 
   goToHome(): void {
@@ -59,16 +88,21 @@ export class DashboardComponent implements OnInit {
     if (this.newChatName) {
       var chat = new Chat();
       chat.name = this.newChatName;
-      this.chatService.addNewChat(chat).subscribe()
+      this.chatService.addNewChat(chat).subscribe(
+        () => {
+          this.loadChats();
+        }
+      );
       this.newChatName = '';
+
     }
   }
 
-  deleteChat(id: string){
-    this.chatService.deleteChat(id)
+  deleteChat(id: string) {
+    this.chatService.deleteChat(id).subscribe(result => {
+      this.loadChats()
+    });
   }
 
-  exportChat(id: string){
-
-  }
+  exportChat(id: string) {}
 }

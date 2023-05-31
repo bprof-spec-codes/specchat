@@ -22,7 +22,7 @@
         </div>
       </div>
       <div class="row">
-        <p *ngIf="errormessage != ''" class="text-danger">User already in chat</p>
+        <p *ngIf="errorMessage != ''" class="text-danger">User already in chat</p>
       </div>
       <div class="row pt-3">
         <div class="col-3">
@@ -54,16 +54,36 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let chat of chats">
-              <td>{{ chat.name }}</td>
-              <td class="d-flex flex-row gap-3">
-                <button class="btn btn-danger" (click)="deleteChat(chat.id)">Delete</button>
-                <button class="btn btn-secondary" (click)="exportChat(chat.id)">Export</button>
-              </td>
-            </tr>
+            <ng-container *ngFor="let chat of chats">
+              <tr>
+                <td>{{ chat.name }}</td>
+                <td class="d-flex flex-row gap-3">
+                  <button class="btn btn-danger" (click)="deleteChat(chat.id)">Delete</button>
+                  <button class="btn btn-secondary" (click)="exportChat(chat.id)">Export</button>
+                  <button class="btn btn-primary" type="button" 
+                          data-bs-toggle="collapse" 
+                          [attr.data-bs-target]="'#collapse-' + chat.id" 
+                          [attr.aria-expanded]="chatStates[chat.id]"
+                          aria-controls="collapseExample"
+                          (click)="loadChatUsers(chat.id)">Toggle</button>
+                </td>
+              </tr>
+              <tr>
+                <td [attr.colspan]="2">
+                  <div class="collapse" [attr.id]="'collapse-' + chat.id" [ngClass]="{'show': chatStates[chat.id]}">
+                    <ul>
+                      <li *ngFor="let user of chatusers">
+                        {{ user.userName }}
+                        <button class="btn btn-danger ml-3" (click)="removeUserFromChat(chat.id, user.id)">Remove</button>
+                      </li>
+                    </ul>
+                  </div>
+                </td>
+              </tr>
+            </ng-container>            
           </tbody>
         </table>
-      </div>
+      </div>      
     </div>
   </div>
 </div>

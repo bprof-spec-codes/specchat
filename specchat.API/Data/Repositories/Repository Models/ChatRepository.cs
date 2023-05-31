@@ -97,6 +97,21 @@ namespace specchat.API.Data.Repositories.Repository_Models
             }
         }
 
+        public void RemoveUserFromChat(string chatid, string userId)
+        {
+            var chat = _context.ChatUsers.FirstOrDefault(t => t.ChatId == chatid && t.UserId == userId);
+            if (chat != null)
+            {
+                _context.ChatUsers.Remove(chat);
+                _context.SaveChanges();
+            }
+            else
+            {
+                throw new ArgumentException("There's no chat with this id: " + chat.ChatId);
+            }
+
+        }
+
         public IEnumerable<Chat> GetByUserId(string userid)
         {
             var chats = _context.Chats
@@ -104,6 +119,15 @@ namespace specchat.API.Data.Repositories.Repository_Models
                 .ToList();
 
             return chats;
+        }
+
+        public IEnumerable<ApplicationUser> GetByChatId(string chatId)
+        {
+            var users = _context.Users
+                .Where(chat => chat.ChatUsers.Any(chatUser => chatUser.ChatId == chatId))
+                .ToList();
+
+            return users;
         }
     }
 }

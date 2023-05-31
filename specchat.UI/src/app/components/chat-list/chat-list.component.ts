@@ -51,14 +51,11 @@ export class ChatListComponent implements OnInit {
 
   sendMessage(content: string): void {
     var msg = new Message();
-
-
     msg.id = ""
     msg.mainMessageId = this.selectedMessage.id
     msg.content = content
     msg.userId = this.user.id
     msg.chatId = this.selectedMessage.chatId
-    console.log(msg);
 
     this.messageService.addNewMessage(msg)
       .subscribe((result) => {
@@ -68,9 +65,7 @@ export class ChatListComponent implements OnInit {
             if (textarea) {
               textarea.value = ''; // Reset the textarea value to an empty string
             }
-          this.msgs.filter(
-            (x) =>  x.mainMessageId == this.selectedMessage.id
-          );
+          this.showMsgs()
         });
     });
   }

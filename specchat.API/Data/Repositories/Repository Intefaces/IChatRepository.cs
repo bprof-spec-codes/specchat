@@ -12,5 +12,7 @@ namespace specchat.API.Data.Repositories.Repository_Intefaces
         bool IsUserInChat(string chatId, string userId);
         void AddUserToChat(string chatId, string userId);
         IEnumerable<Chat> GetByUserId(string userid);
+        IEnumerable<ApplicationUser> GetByChatId(string chatId);
+        void RemoveUserFromChat(string chatid, string userId);
     }
 }

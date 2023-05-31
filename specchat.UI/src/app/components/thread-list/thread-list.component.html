@@ -29,7 +29,8 @@
                         (click)="newMessage.focus()"><i class="bi bi-chat-text"></i></button>
                 <button class="btn btn-dark" placement="bottom" ngbTooltip="Reply to thread"
                         (click)="onMainMessageClick(msg)"><i class="bi bi-reply"></i></button>
-                <button class="btn btn-dark" placement="bottom" ngbTooltip="Pin message"><i class="bi bi-pin-angle"></i></button>
+                <button class="btn btn-dark" placement="bottom" ngbTooltip="Pin message"
+                  *ngIf="user.role == 'Teacher'" (click)="pinMsg(msg.id)"><i class="bi bi-pin-angle"></i></button>
                 <div class="btn-group dropup" *ngIf="msg.userId == user.id">
                   <button type="button" class="btn btn-dark" data-bs-toggle="dropdown" aria-expanded="false">
                     <i class="bi bi-three-dots-vertical"></i>
