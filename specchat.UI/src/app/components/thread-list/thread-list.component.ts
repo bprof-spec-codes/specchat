@@ -22,7 +22,6 @@ export class ThreadListComponent implements OnInit {
 
   @Input() set selectedThread(chat: Chat) {
     this.selectedChat = chat;
-    console.log(this.selectedChat)
   }
 
   @Input() set thisUser(user: User){
@@ -46,7 +45,7 @@ export class ThreadListComponent implements OnInit {
       return [];
     }
     return this.msgs.filter(
-      (x) =>  x.mainMessageId == "" && x.chatId == this.selectedChat.id
+      (x) =>  x.mainMessageId == null && x.chatId == this.selectedChat.id
       
     );
     
@@ -60,23 +59,21 @@ export class ThreadListComponent implements OnInit {
     var msg = new Message();
     
     msg.id = ""
-    msg.mainMessageId = ""
+    msg.mainMessageId = null
     msg.content = content
     msg.userId = this.user.id
     msg.chatId = this.selectedChat.id
-    console.log(msg);
 
     this.messageService.addNewMessage(msg)
       .subscribe((result) => {
         this.messageService.getAll().subscribe((result: Message[]) => {
           this.msgs = result;
+          this.showMsgs()
           const textarea: HTMLTextAreaElement = document.getElementById('newMessage') as HTMLTextAreaElement;
             if (textarea) {
               textarea.value = ''; // Reset the textarea value to an empty string
             }
-          this.msgs.filter(
-            (x) =>  x.mainMessageId == "" && x.chatId == this.selectedChat.id
-          );
+          
         });
     });
   }
@@ -97,8 +94,6 @@ export class ThreadListComponent implements OnInit {
   
   editMessage(messageId: string): void {
     var msg = this.msgs.find(t => t.id == messageId)
-    console.log("edit")
-    console.log(msg?.userId != this.user.id)
   }
 
   deleteMessage(messageId: string){
@@ -116,4 +111,7 @@ export class ThreadListComponent implements OnInit {
     })
   }
   
+  pinMsg(id: string) {
+
+  }
 }
