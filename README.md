@@ -99,11 +99,11 @@ post, leellenőrzi a megadott credential-t és helyes felhasználónév, jelszó
   frissíti egy üzenet tulajdonságait
 #### Felhasználói felület
 Login
-!(login)[/images/login.png]
+![login](/images/login.png)
 Itt tud belépni a felhasználó
-!(dashboard)[/images/dashboard.png]
+![dashboard](/images/dashboard.png)
 Az admin itt tudja hozzáadni a felhasználókat a chat-ekhez. Illetve azokat létrehozni, törölni és exportálni.
-!(chat)[/images/chat.png]
+![chat](/images/chat.png)
 Itt tudnak közlekedni a chat-ek között és üzeneteket írni bele.
 
 # Probléma jegyzőkönyv
