@@ -14,7 +14,10 @@ namespace specchat.API.Data.Repositories.Repository_Models
 
         public void Create(Emoji emoji)
         {
+            emoji.Id = Guid.NewGuid().ToString();
             var old = _context.Emojis.FirstOrDefault(t => t.Id == emoji.Id);
+
+
             if (old != null)
             {
                 throw new ArgumentException("There's already a emoji with this id: " + emoji.Id);

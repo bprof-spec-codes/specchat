@@ -1,8 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
-import { EditorModule, TINYMCE_SCRIPT_SRC } from '@tinymce/tinymce-angular';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ThreadListComponent } from './components/thread-list/thread-list.component';
@@ -17,6 +15,7 @@ import { LogoutComponent } from './components/logout/logout.component';
 import { RegisterComponent } from './components/register/register.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { EditorModule } from '@tinymce/tinymce-angular';
 import { QRCodeModule } from 'angularx-qrcode';
 
 @NgModule({
@@ -46,10 +45,6 @@ import { QRCodeModule } from 'angularx-qrcode';
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,
       multi: true,
-    },
-    { 
-      provide: TINYMCE_SCRIPT_SRC, 
-      useValue: 'tinymce/tinymce.min.js' 
     }
   ],
   bootstrap: [AppComponent]
