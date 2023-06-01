@@ -16,7 +16,7 @@ namespace specchat.API.Models
         public string Id { get; set; }
 
         [Required]
-        public string Code { get; }
+        public string Code { get; set; }
 
         public string UserId { get; set; }
 

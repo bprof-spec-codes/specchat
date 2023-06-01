@@ -88,12 +88,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseCors("SpecChatOrigins");
-app.UseStaticFiles(new StaticFileOptions
-{
-    FileProvider = new PhysicalFileProvider(
-           Path.Combine(builder.Environment.ContentRootPath, "wwwroot", "savedChats")),
-    RequestPath = "/Saves"
-});
+
 
 app.UseHttpsRedirection();
 

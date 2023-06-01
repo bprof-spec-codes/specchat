@@ -2,10 +2,11 @@
     <div>
       <button class="btn" (click)="closeThread()"><i class="bi bi-x-lg"></i></button>
     </div>
+    <h3>Reply to thread</h3>
     <div class="flex-grow-1 pt-auto position-relative overflow-scroll chat-scroll">
       <ul class="w-100">
         <li *ngFor="let msg of showMsgs()">
-          <div class="d-flex gap-2">
+          <div class="d-flex gap-2" [style.background-color]="msg.isPinned ? '#dddddd' : ''">
             <img src="http://placehold.it/50/55C1E7/fff&text=U"
                   alt="User Avatar"
                   class="rounded float-start"
@@ -18,19 +19,16 @@
                       <i class="bi bi-clock"></i>{{dateParser(msg.time)}}
                     </small>
                 </div>
-                <p>
-                    {{msg.content}}
-                </p>
+                <p id="{{ msg.id }}" [innerHTML]="msg.content"></p>
             </div>
           </div>
           <div class="message-actions hide-actions">
             <div class="btn-group">
-              <button class="btn btn-dark" placement="bottom" ngbTooltip="Nice job!">😊</button>
-              <button class="btn btn-dark" placement="bottom" ngbTooltip="Completed">✅</button>
-              <button class="btn btn-dark" placement="bottom" ngbTooltip="I love it!">❤️</button>
-              <button class="btn btn-dark" placement="bottom" ngbTooltip="Reply in thread"
-                      (click)="newMessage.focus()"><i class="bi bi-chat-text"></i></button>
-              <button class="btn btn-dark" placement="bottom" ngbTooltip="Pin message"><i class="bi bi-pin-angle"></i></button>
+              <button class="btn btn-dark" placement="bottom" ngbTooltip="Nice job!" (click)="reactwithEmoji(1, msg.id)">😊</button>
+                <button class="btn btn-dark" placement="bottom" ngbTooltip="Completed" (click)="reactwithEmoji(2, msg.id)">✅</button>
+                <button class="btn btn-dark" placement="bottom" ngbTooltip="I love it!" (click)="reactwithEmoji(3, msg.id)">❤️</button>
+              <button class="btn btn-dark" placement="bottom" ngbTooltip="Pin message"
+                  *ngIf="user.role == 'Teacher'" (click)="pinMsg(msg)"><i class="bi bi-pin-angle"></i></button>
               <div class="btn-group dropup" *ngIf="msg.userId == user.id">
                 <button type="button" class="btn btn-dark" data-bs-toggle="dropdown" aria-expanded="false">
                   <i class="bi bi-three-dots-vertical"></i>
@@ -47,11 +45,19 @@
       </ul>
     </div>
     <div class="d-flex flex-row align-items-center gap-2">
-      <img class="rounded-circle" src="https://i.imgur.com/RpzrMR2.jpg" width="30">
       <div class="form-floating flex-fill">
-        <textarea #newMessage class="form-control" placeholder="Leave a comment here" id="newMessage" style="resize:none"></textarea>
-        <label for="newMessage">Post a reply</label>
+        <editor 
+        [init]="{
+          height: 10,
+          resize: false,
+          toolbar: false,
+          menubar: false,
+          plugins: 'emoticons autolink mentions',
+          emoticons_database: 'emojis',
+          statusbar: false
+        }"
+        [(ngModel)]="newMessageContent" apiKey="f89mozl7zmxtjvfdeztre3hrditzykkdqfsi4rdni8kkgn5c"></editor>
       </div>
-      <button class="btn btn-primary btn-sm shadow-none" type="button" (click)="sendMessage(newMessage.value)"><i class="bi bi-arrow-right-square"></i></button>
+      <button class="btn btn-primary btn-sm shadow-none" type="button" (click)="sendMessage(newMessageContent)"><i class="bi bi-arrow-right-square"></i></button>
     </div>     
   </div>

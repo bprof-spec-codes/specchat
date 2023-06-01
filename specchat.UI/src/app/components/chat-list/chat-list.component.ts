@@ -1,8 +1,12 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { MessageService } from '../../services/message.service';
 import { Message } from '../../_models/message';
+import { Emoji } from '../../_models/emoji';
 import { User } from 'src/app/_models/user';
 import { AuthService } from 'src/app/services/auth.service';
+import { EmojiService } from 'src/app/services/emoji.service';
+import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
+
 
 @Component({
   selector: 'app-chat-list',
@@ -13,8 +17,12 @@ export class ChatListComponent implements OnInit {
   msgs: Message[] = [];
   selectedMessage!: Message;
   user: User
+  newMessageContent: string = ""
 
-  constructor(private messageService: MessageService, private authService: AuthService) {
+  constructor(private messageService: MessageService, 
+              private authService: AuthService,
+              private emojiService: EmojiService,
+              private sanitizer: DomSanitizer ) {
     this.user = new User()
   }
 
@@ -27,22 +35,48 @@ export class ChatListComponent implements OnInit {
       this.msgs = result;
       this.msgs.forEach((message: Message) => {
         this.authService.getUserById(message.userId).subscribe((user: User) => {
+          message.user = user;
+        });
+      });
+    });
+  }
+
+  update(){
+    this.messageService.getAll().subscribe((result: Message[]) => {
+      this.msgs = result;
+
+      this.msgs.forEach((message: Message) => {
+        this.authService.getUserById(message.userId).subscribe((user: User) => {
           message.user = user; // Add the user to the message
         });
       });
     });
-    
-    
   }
 
   showMsgs() {
-    if (this.selectedMessage == null) {
+    if (!this.selectedMessage) {
       return [];
     }
-    var filtermsg = this.msgs.filter(
-      (x) =>  x.mainMessageId == this.selectedMessage.id
+    
+    const filterMsgs = this.msgs.filter(
+      (x) => x.mainMessageId == this.selectedMessage.id
     );
-    return filtermsg;
+  
+    const sortedMsgs = filterMsgs.sort((a, b) => {
+      // Sort by isPinned first
+      if (a.isPinned && !b.isPinned) {
+        return -1; // a comes before b
+      } else if (!a.isPinned && b.isPinned) {
+        return 1; // b comes before a
+      }
+  
+      // Sort by date if isPinned values are the same
+      const timeA = new Date(a.time).getTime();
+      const timeB = new Date(b.time).getTime();
+      return timeA - timeB;
+    });
+  
+    return sortedMsgs;
   }
 
   closeThread() {
@@ -59,14 +93,10 @@ export class ChatListComponent implements OnInit {
 
     this.messageService.addNewMessage(msg)
       .subscribe((result) => {
-        this.messageService.getAll().subscribe((result: Message[]) => {
-          this.msgs = result;
-          const textarea: HTMLTextAreaElement = document.getElementById('newMessage') as HTMLTextAreaElement;
-            if (textarea) {
-              textarea.value = ''; // Reset the textarea value to an empty string
-            }
+        console.log(result)
+          this.newMessageContent = '';
+          this.update()
           this.showMsgs()
-        });
     });
   }
 
@@ -103,5 +133,66 @@ export class ChatListComponent implements OnInit {
           });
         });
     })
+  }
+
+  pinMsg(message: Message) {
+    const pinnedMsgCount = this.msgs.filter((msg) => msg.isPinned).length;
+  
+    if (message.isPinned) {
+      message.isPinned = false;
+    } else {
+      if (pinnedMsgCount >= 3) {
+        return;
+      }
+  
+      message.isPinned = true;
+    }
+  
+    this.messageService.updateMessage(message).subscribe((result) => {
+      console.log(result);
+      this.update();
+      this.showMsgs();
+    });
+  }
+
+  reactwithEmoji(code: number, msgid: string){
+    var emoji = new Emoji()
+
+    switch(code){
+      case 1:
+        emoji.code = ":smikring:"
+        break;
+      case 2:
+        emoji.code = ":checkmark:"
+        break;
+      case 3:
+        emoji.code = ":heart:"
+        break;
+    }
+    
+    emoji.messageId = msgid
+    emoji.userId = this.user.id
+
+    this.emojiService.addNewEmoji(emoji).subscribe(result => {
+      console.log(result);
+    })
+  }
+
+  replaceEmojiCodes(content: string): SafeHtml {
+    const emojiMap: Record<string, string> = {
+      ':smikring:': '😊',
+      ':checkmark:': '✅',
+      ':heart:': '❤️',
+      // Add more emoji codes and their corresponding Unicode representations as needed
+    };
+  
+    let replacedContent = content;
+    for (const code in emojiMap) {
+      const emoji = emojiMap[code];
+      replacedContent = replacedContent.replace(code, emoji);
+    }
+  
+    // Sanitize the replaced content to prevent any potential security issues
+    return this.sanitizer.bypassSecurityTrustHtml(replacedContent);
   }
 }
