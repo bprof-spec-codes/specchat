@@ -189,7 +189,8 @@ namespace specchat.API.Migrations
                         name: "FK_ChatUsers_Chats_ChatId",
                         column: x => x.ChatId,
                         principalTable: "Chats",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -229,6 +230,7 @@ namespace specchat.API.Migrations
                 columns: table => new
                 {
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Code = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     MessageId = table.Column<string>(type: "nvarchar(450)", nullable: false)
                 },
@@ -252,9 +254,9 @@ namespace specchat.API.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "57904da3-ce6b-4e24-8af5-e0119baf42da", null, "User", "USER" },
-                    { "7a124792-7f2a-4b2f-a5f3-222a4e1a5da0", null, "Teacher", "TEACHER" },
-                    { "8fa25c3e-7ea0-4990-bf7d-bf9afba90b6a", null, "Admin", "ADMIN" }
+                    { "76d057c3-1ad3-489f-8548-82cc70ec7f0c", null, "User", "USER" },
+                    { "a6d0f77e-4754-4dad-9413-fcc94650918e", null, "Teacher", "TEACHER" },
+                    { "f0439e01-4951-4661-898c-320834f000c2", null, "Admin", "ADMIN" }
                 });
 
             migrationBuilder.InsertData(
@@ -262,9 +264,9 @@ namespace specchat.API.Migrations
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "FirstName", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "PictureContentType", "PictureData", "SecurityStamp", "TwoFactorEnabled", "UserName" },
                 values: new object[,]
                 {
-                    { "434ae560-46c7-407b-bc42-c366e7ca6f30", 0, "33e3955b-c691-4d96-8375-4e9336da199c", "admin@admin.adm", true, "Super", "User", false, null, null, "ADMINUSER", "AQAAAAEAACcQAAAAEF+oqEtp/WLNlMpuzK0JXzQZA8Y7MRrQqwOsxxanqOmAyLspPZU4/w5Jeji5f90Gjw==", null, false, null, null, "22043bca-369f-4ad7-977e-bd89ddf15139", false, "adminuser" },
-                    { "e368860c-9be4-402a-8d5f-cef41b26d9b5", 0, "52c0f802-ea17-48ad-bf26-998a88d2fb21", "teacher@teach.er", true, "Teacher", "User", false, null, null, "TEACHEREX", "AQAAAAEAACcQAAAAEErh0ORgc5vlcigQMoy5zKD+adUSguL5649WhdLIvfUZUQlBUhkAOL3SyIl8NOmkdA==", null, false, null, null, "cb92e802-612e-44fb-b552-d82292c34f01", false, "teacherex" },
-                    { "f0151a2e-cad2-4b84-b900-232f2cc6c714", 0, "6a37e2ab-85bb-4a86-8cce-d794c575f553", "basic@us.er", true, "Basic", "User", false, null, null, "BASICUSER", "AQAAAAEAACcQAAAAEC3JYzoLzND4wulczIpLlO63VM1GiWCR4AhDi6SCtCLnREdWQYkjHRouOu1PIEyllQ==", null, false, null, null, "ae4ff8c9-e67d-4548-a7c6-b6d5fea3f80e", false, "basicuser" }
+                    { "81a09a0f-f121-4956-9e4c-355d48cc79a0", 0, "ba6cebc1-aea9-4763-8772-c1e0ae3d9bd9", "teacher@teach.er", true, "Teacher", "User", false, null, null, "TEACHEREX", "AQAAAAEAACcQAAAAEPNw0vva9b3D0pM8Tu8KOJvtXu1ySGw/o9U59rFN9i8fKdrYYtn3oJCo1J4Yxz44bg==", null, false, null, null, "1ba3f77b-dc19-4c1f-9e18-bc4f42cea2ef", false, "teacherex" },
+                    { "adbefd18-639c-4f26-8c32-47ee1b375650", 0, "a5d151ab-a97b-4b9b-bbd4-f7dcb9f34358", "basic@us.er", true, "Basic", "User", false, null, null, "BASICUSER", "AQAAAAEAACcQAAAAEG1nyi0w3vz+fm6rPzAIHZcNmVCkUxACREUd1qA9IoLhxD2Ln756+tW2p4DD9dal4w==", null, false, null, null, "4802071a-60bc-472e-8230-fe6d8aa5bb0b", false, "basicuser" },
+                    { "d570432b-b434-4b8a-8ff1-fc8ccb8fcc25", 0, "b07955a4-4203-4034-9267-602f5f08d417", "admin@admin.adm", true, "Super", "User", false, null, null, "ADMINUSER", "AQAAAAEAACcQAAAAEIvFaOo3nln/C+P1iKUCGMkcMiVhwzpr5jHPdpShRKLmsgfJ6CVcc1R5fpXAcjwFlg==", null, false, null, null, "a37cf5a8-11e2-4b73-a44a-e9a212ea6bb1", false, "adminuser" }
                 });
 
             migrationBuilder.InsertData(
@@ -290,17 +292,17 @@ namespace specchat.API.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetUserRoles",
                 columns: new[] { "RoleId", "UserId" },
-                values: new object[] { "8fa25c3e-7ea0-4990-bf7d-bf9afba90b6a", "434ae560-46c7-407b-bc42-c366e7ca6f30" });
+                values: new object[] { "a6d0f77e-4754-4dad-9413-fcc94650918e", "81a09a0f-f121-4956-9e4c-355d48cc79a0" });
 
             migrationBuilder.InsertData(
                 table: "AspNetUserRoles",
                 columns: new[] { "RoleId", "UserId" },
-                values: new object[] { "57904da3-ce6b-4e24-8af5-e0119baf42da", "e368860c-9be4-402a-8d5f-cef41b26d9b5" });
+                values: new object[] { "76d057c3-1ad3-489f-8548-82cc70ec7f0c", "adbefd18-639c-4f26-8c32-47ee1b375650" });
 
             migrationBuilder.InsertData(
                 table: "AspNetUserRoles",
                 columns: new[] { "RoleId", "UserId" },
-                values: new object[] { "7a124792-7f2a-4b2f-a5f3-222a4e1a5da0", "f0151a2e-cad2-4b84-b900-232f2cc6c714" });
+                values: new object[] { "f0439e01-4951-4661-898c-320834f000c2", "d570432b-b434-4b8a-8ff1-fc8ccb8fcc25" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",

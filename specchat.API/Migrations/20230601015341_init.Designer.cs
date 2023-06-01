@@ -12,8 +12,8 @@ using specchat.API.Data;
 namespace specchat.API.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230601001729_emoji")]
-    partial class emoji
+    [Migration("20230601015341_init")]
+    partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -53,19 +53,19 @@ namespace specchat.API.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "3c64e4fe-73d9-450d-9e8a-0b8ff52d52b0",
+                            Id = "f0439e01-4951-4661-898c-320834f000c2",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "d731b9e0-cbbb-4d4d-9df6-4e9f8ae4a669",
+                            Id = "76d057c3-1ad3-489f-8548-82cc70ec7f0c",
                             Name = "User",
                             NormalizedName = "USER"
                         },
                         new
                         {
-                            Id = "cc1cb33f-4d0f-45df-9fb0-f0d880b0c484",
+                            Id = "a6d0f77e-4754-4dad-9413-fcc94650918e",
                             Name = "Teacher",
                             NormalizedName = "TEACHER"
                         });
@@ -160,18 +160,18 @@ namespace specchat.API.Migrations
                     b.HasData(
                         new
                         {
-                            UserId = "87e8cfe1-d303-4ed8-9808-3e3d3794ca85",
-                            RoleId = "3c64e4fe-73d9-450d-9e8a-0b8ff52d52b0"
+                            UserId = "d570432b-b434-4b8a-8ff1-fc8ccb8fcc25",
+                            RoleId = "f0439e01-4951-4661-898c-320834f000c2"
                         },
                         new
                         {
-                            UserId = "d30dbeb3-9bf1-43a8-a3e3-cc7b647eb630",
-                            RoleId = "cc1cb33f-4d0f-45df-9fb0-f0d880b0c484"
+                            UserId = "81a09a0f-f121-4956-9e4c-355d48cc79a0",
+                            RoleId = "a6d0f77e-4754-4dad-9413-fcc94650918e"
                         },
                         new
                         {
-                            UserId = "1c640ff2-fcfd-45d2-9be7-80a4df6d736f",
-                            RoleId = "d731b9e0-cbbb-4d4d-9df6-4e9f8ae4a669"
+                            UserId = "adbefd18-639c-4f26-8c32-47ee1b375650",
+                            RoleId = "76d057c3-1ad3-489f-8548-82cc70ec7f0c"
                         });
                 });
 
@@ -277,52 +277,52 @@ namespace specchat.API.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "87e8cfe1-d303-4ed8-9808-3e3d3794ca85",
+                            Id = "d570432b-b434-4b8a-8ff1-fc8ccb8fcc25",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "4ca56274-337d-498d-bc5f-7420532ee977",
+                            ConcurrencyStamp = "b07955a4-4203-4034-9267-602f5f08d417",
                             Email = "admin@admin.adm",
                             EmailConfirmed = true,
                             FirstName = "Super",
                             LastName = "User",
                             LockoutEnabled = false,
                             NormalizedUserName = "ADMINUSER",
-                            PasswordHash = "AQAAAAEAACcQAAAAEHH8LNTBcSJeCYEworc6q+38vlIhpxNT+RIrlAg8G3SVma7ZM+loIP7gr6gC2Lv98Q==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEIvFaOo3nln/C+P1iKUCGMkcMiVhwzpr5jHPdpShRKLmsgfJ6CVcc1R5fpXAcjwFlg==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "e86fcb25-c460-4d4e-8267-88ddc33917b7",
+                            SecurityStamp = "a37cf5a8-11e2-4b73-a44a-e9a212ea6bb1",
                             TwoFactorEnabled = false,
                             UserName = "adminuser"
                         },
                         new
                         {
-                            Id = "d30dbeb3-9bf1-43a8-a3e3-cc7b647eb630",
+                            Id = "81a09a0f-f121-4956-9e4c-355d48cc79a0",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "ce7db66c-28c7-4d74-a87d-e200ef271f5b",
+                            ConcurrencyStamp = "ba6cebc1-aea9-4763-8772-c1e0ae3d9bd9",
                             Email = "teacher@teach.er",
                             EmailConfirmed = true,
                             FirstName = "Teacher",
                             LastName = "User",
                             LockoutEnabled = false,
                             NormalizedUserName = "TEACHEREX",
-                            PasswordHash = "AQAAAAEAACcQAAAAEBntX3fPKZoZr1X7KT5uuFvPgFhbFdcbjdpzNvtwWI/RtG+YHwS/dWFD0a2LAqmssg==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEPNw0vva9b3D0pM8Tu8KOJvtXu1ySGw/o9U59rFN9i8fKdrYYtn3oJCo1J4Yxz44bg==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "16d91ca5-de7f-45ce-82f8-16c3ddc81240",
+                            SecurityStamp = "1ba3f77b-dc19-4c1f-9e18-bc4f42cea2ef",
                             TwoFactorEnabled = false,
                             UserName = "teacherex"
                         },
                         new
                         {
-                            Id = "1c640ff2-fcfd-45d2-9be7-80a4df6d736f",
+                            Id = "adbefd18-639c-4f26-8c32-47ee1b375650",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "9a91a5bd-e858-4637-877f-3271d8764771",
+                            ConcurrencyStamp = "a5d151ab-a97b-4b9b-bbd4-f7dcb9f34358",
                             Email = "basic@us.er",
                             EmailConfirmed = true,
                             FirstName = "Basic",
                             LastName = "User",
                             LockoutEnabled = false,
                             NormalizedUserName = "BASICUSER",
-                            PasswordHash = "AQAAAAEAACcQAAAAEDcJJ7KZP9Iz5lj+6vziTtnYXxiW2KYDDvec/Q7ppllBitaTjH4uIHfdmhdRVQ58Ng==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEG1nyi0w3vz+fm6rPzAIHZcNmVCkUxACREUd1qA9IoLhxD2Ln756+tW2p4DD9dal4w==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "fa05b256-8e26-4e66-b4b8-8b5037ed60eb",
+                            SecurityStamp = "4802071a-60bc-472e-8230-fe6d8aa5bb0b",
                             TwoFactorEnabled = false,
                             UserName = "basicuser"
                         });
