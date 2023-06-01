@@ -11,7 +11,7 @@
     - [Használat](#használat)
       - [API endpoint-ok](#api-endpoint-ok)
       - [Felhasználói felület](#felhasználói-felület)
-- [Probléma jegyzőkönyv](#probléma-jegyzőkönyv)
+  - [Probléma jegyzőkönyv](#probléma-jegyzőkönyv)
 
 ## Csapatbeosztás
 - Gyöngyösi Dávid – Frontend
@@ -106,7 +106,7 @@ Az admin itt tudja hozzáadni a felhasználókat a chat-ekhez. Illetve azokat l�
 ![chat](/images/chat.png)
 Itt tudnak közlekedni a chat-ek között és üzeneteket írni bele.
 
-# Probléma jegyzőkönyv
+## Probléma jegyzőkönyv
 1 Autorizáció kezelés
   - leváltottuk az eredeti projekt típust és külön szedtük a backendet és a frontendet
 2 Backenddel való kommunikáció
