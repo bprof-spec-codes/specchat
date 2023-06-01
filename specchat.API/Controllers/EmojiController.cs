@@ -1,26 +1,25 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using specchat.API.Data.Logics;
 using specchat.API.Data.Logics.Logic_Interfaces;
 using specchat.API.Models;
 
 namespace specchat.API.Controllers
 {
     [Route("api/[controller]")]
-    public class MessageController : Controller
+    public class EmojiController : Controller
     {
-        private readonly IMessageLogic _messageLogic;
+        private readonly IEmojiLogic _emojiLogic;
 
-        public MessageController(IMessageLogic messageLogic)
+        public EmojiController(IEmojiLogic emojiLogic)
         {
-            _messageLogic = messageLogic;
+            _emojiLogic = emojiLogic;
         }
 
         [HttpPost]
-        public void AddNewMessage([FromBody]Message message)
+        public void AddNewEmoji([FromBody] Emoji emoji)
         {
             try
             {
-                _messageLogic.AddNewMessage(message);
+                _emojiLogic.AddNewEmoji(emoji);
             }
             catch (Exception e)
             {
@@ -29,11 +28,11 @@ namespace specchat.API.Controllers
         }
 
         [HttpDelete("{id}")]
-        public void DeleteMessage(string id)
+        public void DeleteEmoji(string id)
         {
             try
             {
-                _messageLogic.DeleteMessage(id);
+                _emojiLogic.DeleteEmoji(id);
             }
             catch (Exception e)
             {
@@ -42,17 +41,17 @@ namespace specchat.API.Controllers
         }
 
         [HttpGet]
-        public IEnumerable<Message> GetAll()
+        public IEnumerable<Emoji> GetAll()
         {
-            return _messageLogic.GetAll();
+            return _emojiLogic.GetAll();
         }
 
         [HttpGet("{id}")]
-        public Message GetById(string id)
+        public IEnumerable<Emoji> GetById(string id)
         {
             try
             {
-                return _messageLogic.GetById(id);
+                return _emojiLogic.GetById(id);
             }
             catch (Exception e)
             {
@@ -62,11 +61,11 @@ namespace specchat.API.Controllers
         }
 
         [HttpPut]
-        public void UpdateMessage([FromBody] Message message)
+        public void UpdateEmoji([FromBody] Emoji emoji)
         {
             try
             {
-                _messageLogic.UpdateMessage(message);
+                _emojiLogic.UpdateEmoji(emoji);
             }
             catch (Exception e)
             {

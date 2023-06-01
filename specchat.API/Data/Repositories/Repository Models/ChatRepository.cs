@@ -1,11 +1,12 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using specchat.API.Data;
 using specchat.API.Data.Repositories;
+using specchat.API.Data.Repositories.Repository_Intefaces;
 using specchat.API.Models;
 using System;
 using System.Security.Cryptography;
 
-namespace specchat.Data.Repositories
+namespace specchat.API.Data.Repositories.Repository_Models
 {
     public class ChatRepository : IChatRepository
     {
@@ -96,6 +97,21 @@ namespace specchat.Data.Repositories
             }
         }
 
+        public void RemoveUserFromChat(string chatid, string userId)
+        {
+            var chat = _context.ChatUsers.FirstOrDefault(t => t.ChatId == chatid && t.UserId == userId);
+            if (chat != null)
+            {
+                _context.ChatUsers.Remove(chat);
+                _context.SaveChanges();
+            }
+            else
+            {
+                throw new ArgumentException("There's no chat with this id: " + chat.ChatId);
+            }
+
+        }
+
         public IEnumerable<Chat> GetByUserId(string userid)
         {
             var chats = _context.Chats
@@ -103,6 +119,15 @@ namespace specchat.Data.Repositories
                 .ToList();
 
             return chats;
+        }
+
+        public IEnumerable<ApplicationUser> GetByChatId(string chatId)
+        {
+            var users = _context.Users
+                .Where(chat => chat.ChatUsers.Any(chatUser => chatUser.ChatId == chatId))
+                .ToList();
+
+            return users;
         }
     }
 }

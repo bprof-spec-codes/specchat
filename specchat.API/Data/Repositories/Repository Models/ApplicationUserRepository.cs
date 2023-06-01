@@ -1,9 +1,10 @@
 ﻿using specchat.API.Data;
 using specchat.API.Data.Repositories;
+using specchat.API.Data.Repositories.Repository_Intefaces;
 using specchat.API.Models;
 using System;
 
-namespace specchat.Data.Repositories
+namespace specchat.API.Data.Repositories.Repository_Models
 {
     public class ApplicationUserRepository : IApplicationUserRepository
     {

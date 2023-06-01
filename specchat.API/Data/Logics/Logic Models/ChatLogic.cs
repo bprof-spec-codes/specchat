@@ -3,9 +3,10 @@ using Microsoft.AspNetCore.Mvc;
 using specchat.API.Data.Logics;
 using specchat.API.Models;
 using specchat.API.Data.Repositories;
-using specchat.Data.Repositories;
+using specchat.API.Data.Repositories.Repository_Intefaces;
+using specchat.API.Data.Logics.Logic_Interfaces;
 
-namespace specchat.Data.Logics
+namespace specchat.API.Data.Logics.Logic_Models
 {
     public class ChatLogic : IChatLogic
     {
@@ -56,9 +57,19 @@ namespace specchat.Data.Logics
             rep.AddUserToChat(chatId, userId);
         }
 
+        public void RemoveUserFromChat(string chatid, string userId)
+        {
+            rep.RemoveUserFromChat(chatid, userId);
+        }
+
         public bool IsUserInChat(string chatId, string userId)
         {
             return rep.IsUserInChat(chatId, userId);
+        }
+
+        public IEnumerable<ApplicationUser> GetByChatId(string chatId)
+        {
+            return rep.GetByChatId(chatId);
         }
     }
 }

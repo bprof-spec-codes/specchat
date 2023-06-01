@@ -22,7 +22,6 @@ export class HomeComponent {
       this.authService.getUserInfo().subscribe(
         resp => {
           this.user = resp;
-          console.log(this.user)
         }
       )
     }

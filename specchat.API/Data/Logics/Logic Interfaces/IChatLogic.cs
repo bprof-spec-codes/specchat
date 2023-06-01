@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using specchat.API.Models;
 
-namespace specchat.API.Data.Logics
+namespace specchat.API.Data.Logics.Logic_Interfaces
 {
     public interface IChatLogic
     {
@@ -13,5 +13,7 @@ namespace specchat.API.Data.Logics
         void DeleteChat(string id);
         void AddUserToChat(string chatId, string userId);
         bool IsUserInChat(string chatId, string userId);
+        IEnumerable<ApplicationUser> GetByChatId(string chatId);
+        void RemoveUserFromChat(string chatid, string userId);
     }
 }

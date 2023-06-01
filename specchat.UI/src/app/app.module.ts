@@ -15,6 +15,8 @@ import { LogoutComponent } from './components/logout/logout.component';
 import { RegisterComponent } from './components/register/register.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { EditorModule } from '@tinymce/tinymce-angular';
+import { QRCodeModule } from 'angularx-qrcode';
 
 @NgModule({
   declarations: [
@@ -34,14 +36,16 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
     HttpClientModule,
     ReactiveFormsModule,
     FormsModule,
-    AppRoutingModule
+    AppRoutingModule,
+    EditorModule,
+    QRCodeModule
   ],
   providers: [
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,
       multi: true,
-    },
+    }
   ],
   bootstrap: [AppComponent]
 })

@@ -1,10 +1,11 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using specchat.API.Data;
 using specchat.API.Data.Repositories;
+using specchat.API.Data.Repositories.Repository_Intefaces;
 using specchat.API.Models;
 using System;
 
-namespace specchat.Data.Repositories
+namespace specchat.API.Data.Repositories.Repository_Models
 {
     public class MessageRepository : IMessageRepository
     {
@@ -60,10 +61,17 @@ namespace specchat.Data.Repositories
         public void Update(Message message)
         {
             var old = _context.Messages.FirstOrDefault(t => t.Id == message.Id);
+
+            old.IsPinned = message.IsPinned;
+            old.Content = message.Content;
+            old.Emojis = message.Emojis;
+
             if (old == null)
             {
                 throw new ArgumentException("There's no message with this id: " + message.Id);
             }
+
+            _context.SaveChanges();
         }
     }
 }
