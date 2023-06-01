@@ -5,6 +5,7 @@ import { Chat } from '../_models/chat';
 import { environment } from 'src/environments/environment';
 import { ChatUser } from '../_models/chatuser';
 import { User } from '../_models/user';
+import { Link } from '../_models/link';
 
 
 @Injectable({
@@ -52,6 +53,6 @@ export class ChatService {
   }
 
   getJsonLink(id: string): Observable<any>{
-    return this.http.post<string>(`${environment.baseApiUrl}/${this.url}/UploadFile/${id}`, id);
+    return this.http.get<Link>(`${environment.baseApiUrl}/${this.url}/UploadFile/${id}`);
   }
 }

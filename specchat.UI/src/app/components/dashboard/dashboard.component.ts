@@ -112,8 +112,7 @@ export class DashboardComponent implements OnInit {
 
   exportChat(id: string) {
     this.chatService.getJsonLink(id).subscribe(result => {
-      this.link = result
+      this.qrString = 'https://localhost:7069/saves/' + result.link
     })
-    this.qrString = 'https://localhost:7069/saves/' + this.link;
   }
 }

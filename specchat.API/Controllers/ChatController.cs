@@ -79,8 +79,8 @@ namespace specchat.API.Controllers
                 Console.WriteLine(DateTime.Now.ToShortTimeString() + "Error: " + e.Message);
             }
         }
-        [HttpPost("UploadFile/{id}")]
-        public string UploadFile(string id)
+        [HttpGet("UploadFile/{id}")]
+        public LinkEnding UploadFile(string id)
         {
             var chat = _chatLogic.GetById(id);
             var messages = chat.Messages;
@@ -121,7 +121,7 @@ namespace specchat.API.Controllers
             {
                 sw.Write(json);
             }
-            return fileName.ToString();
+            return new LinkEnding() { Link = fileName.ToString()};
         }
     }
 }
