@@ -50,4 +50,8 @@ export class ChatService {
   removeUserFromChat(chatid: string, userid: string): Observable<any> {
     return this.http.delete(`${environment.baseApiUrl}/${this.url2}?chatid=${chatid}&userid=${userid}`);
   }
+
+  getJsonLink(id: string): Observable<any>{
+    return this.http.post<string>(`${environment.baseApiUrl}/${this.url}/UploadFile/${id}`, id);
+  }
 }

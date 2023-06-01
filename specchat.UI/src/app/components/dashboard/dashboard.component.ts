@@ -21,6 +21,7 @@ export class DashboardComponent implements OnInit {
   errorMessage: string = "";
   newChatName: string = "";
   chatusers: User[] = [];
+  link: string = '';
 
   constructor(private chatService: ChatService, private authService: AuthService, router: Router) {
     this.router = router;
@@ -104,5 +105,9 @@ export class DashboardComponent implements OnInit {
     });
   }
 
-  exportChat(id: string) {}
+  exportChat(id: string) {
+    this.chatService.getJsonLink(id).subscribe(result => {
+      this.link = result
+    })
+  }
 }
