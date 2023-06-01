@@ -41,7 +41,7 @@
       </div>
     </div>
   </div>
-
+  <qrcode *ngIf="qrString !== ''" [qrdata]="qrString" [width]="300" [errorCorrectionLevel]="'M'"></qrcode>
   <div class="row mt-4">
     <div class="col-12">
       <h2>Chats</h2>

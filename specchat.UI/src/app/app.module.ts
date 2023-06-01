@@ -17,6 +17,7 @@ import { LogoutComponent } from './components/logout/logout.component';
 import { RegisterComponent } from './components/register/register.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { QRCodeModule } from 'angularx-qrcode';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
     ReactiveFormsModule,
     FormsModule,
     AppRoutingModule,
-    EditorModule
+    EditorModule,
+    QRCodeModule
   ],
   providers: [
     {

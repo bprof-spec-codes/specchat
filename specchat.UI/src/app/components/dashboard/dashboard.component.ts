@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { QRCodeModule } from 'angularx-qrcode';
 import { Chat } from 'src/app/_models/chat';
 import { ChatUser } from 'src/app/_models/chatuser';
 import { User } from 'src/app/_models/user';
@@ -22,9 +23,13 @@ export class DashboardComponent implements OnInit {
   newChatName: string = "";
   chatusers: User[] = [];
   link: string = '';
+  qrString: string = '';
+  qr: QRCodeModule
 
-  constructor(private chatService: ChatService, private authService: AuthService, router: Router) {
+
+  constructor(private chatService: ChatService, private authService: AuthService, router: Router, qr: QRCodeModule) {
     this.router = router;
+    this.qr = qr;
   }
 
   ngOnInit(): void {
@@ -109,5 +114,6 @@ export class DashboardComponent implements OnInit {
     this.chatService.getJsonLink(id).subscribe(result => {
       this.link = result
     })
+    this.qrString = 'https://localhost:7069/saves/' + this.link;
   }
 }
