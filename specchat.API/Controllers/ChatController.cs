@@ -116,7 +116,7 @@ namespace specchat.API.Controllers
             json += "]";
             json = json.Replace(",]", "]").Replace(",}", "}");
             var fileName = DateTime.Now.Year.ToString() + DateTime.Now.Month.ToString() + DateTime.Now.Day.ToString() + chat.Name + ".json";
-            var filePath = Path.Combine(Directory.GetCurrentDirectory(), @"wwwroot\savedChats", fileName);
+            var filePath = Path.Combine(Directory.GetCurrentDirectory(), @"wwwroot/savedChats", fileName);
             using (StreamWriter sw = new StreamWriter(filePath))
             {
                 sw.Write(json);
